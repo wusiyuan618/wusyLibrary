@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <FrameLayout
+        android:id="@+id/view_carousel_framelayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_carousel_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <LinearLayout
+            android:id="@+id/view_carousel_ll_bottomview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:layout_gravity="bottom"
+            android:gravity="center_vertical">
+            <ImageView
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="15dp"
+                android:src="@mipmap/tz"
+                android:layout_width="13dp"
+                android:layout_height="12dp"/>
+            <TextView
+                android:maxLines="1"
+                android:maxWidth="250dp"
+                android:id="@+id/view_carousel_tv_desc"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:visibility="gone"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#CCCCCC" />
+
+            <LinearLayout
+                android:layout_marginRight="30px"
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
+                android:id="@+id/view_carousel_ll_point"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>

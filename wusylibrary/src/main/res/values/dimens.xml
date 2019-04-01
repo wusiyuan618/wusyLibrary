@@ -1,0 +1,17 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <!-- 标题栏高度 -->
+    <dimen name="titleHeight">44dp</dimen>
+    <!-- 标题栏标题文字大小-->
+    <dimen name="textSize_title">18dp</dimen>
+    <!-- 内容文字大小big-->
+    <dimen name="textSize_content_big">15dp</dimen>
+    <!-- 内容文字大小small-->
+    <dimen name="textSize_content_small">12dp</dimen>
+    <!-- cardview圆角大小 -->
+    <dimen name="radiutSize">4dp</dimen>
+    <!-- 结余给状态栏的高度大小  -->
+    <dimen name="stutsHight">0dp</dimen>
+</resources>

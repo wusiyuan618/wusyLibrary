@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <!-- 标题栏背景颜色 -->
+    <color name="titleViewBackgroundColor">#ffffff</color>
+    <!-- 标题栏标题的背景颜色 -->
+    <color name="titleTextBackgroundColor">#ffffff</color>
+    <!-- 分割线颜色 -->
+    <color name="dividingLineColor">#e5e5e5</color>
+    <!-- 字体选中与未选中的颜色 -->
+    <color name="selectColor">#0676C9</color>
+    <color name="normalColor">#999999</color>
+    <!-- 主要内容的字体的颜色 -->
+    <color name="mainColor">#434141</color>
+    <!-- 附属内容的字体的颜色 -->
+    <color name="subColor">#659aef</color>
+
+    <!-- 纯色 -->
+    <color name="blue">#2572ed</color>
+    <color name="main_color">#9fb8ce</color>
+    <color name="red">#df1134</color>
+    <color name="yellow">#eded0b</color>
+    <color name="green">#10de2b</color>
+
+    <color name="pressed_norml">#ffffff</color>
+    <color name="pressed_click">#eeeeee</color>
+</resources>

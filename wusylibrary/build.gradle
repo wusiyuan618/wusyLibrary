@@ -1,0 +1,54 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets{
+        main{
+            jniLibs.srcDirs=["libs"]
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.12'
+    //    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    //    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    api 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+    api 'com.squareup.okhttp3:okhttp:3.2.0'
+    api 'com.squareup.okio:okio:1.7.0'
+    api 'com.afollestad.material-dialogs:core:0.9.1.0'
+    api 'com.afollestad.material-dialogs:commons:0.9.1.0'
+    //noinspection GradleCompatible
+    api 'com.android.support:appcompat-v7:26.1.0'
+    api 'com.android.support:recyclerview-v7:26.1.0'
+    api 'com.android.support:cardview-v7:26.1.0'
+    api 'com.google.code.gson:gson:2.8.2'
+    api 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+    api 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-7'
+    api files('libs/libthrift-0.10.0.jar')
+    api files('libs/mid-sdk-3.73.jar')
+    api files('libs/mta-android-sdk-3.4.3.jar')
+    api files('libs/slf4j-api-1.7.24.jar')
+    api files('libs/track-sdk_v3.4.0.jar')
+    api files('libs/pinyin4j-2.5.0.jar')
+    //noinspection GradleCompatible
+    api 'com.android.support:design:26.1.0'
+    implementation files('libs/Msc.jar')
+}

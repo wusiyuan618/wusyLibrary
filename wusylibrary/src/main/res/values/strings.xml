@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">WusyLibrary</string>
+    <string name="input_hint">input_hint</string>
+    <string name="input_prefill">input_prefill</string>
+</resources>
