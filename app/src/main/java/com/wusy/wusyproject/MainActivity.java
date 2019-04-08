@@ -3,9 +3,13 @@ package com.wusy.wusyproject;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.TextView;
 
 import com.jkyeo.basicparamsinterceptor.BasicParamsInterceptor;
+import com.wusy.wusylibrary.view.NumberKeyBoxView;
+import com.wusy.wusylibrary.view.PwdIndicator;
 import com.wusy.wusyproject.retrofit.LoginBean;
 import com.wusy.wusyproject.retrofit.PersonAPI;
 import com.wusy.wusyproject.retrofit.PersonAPILoader;
@@ -24,16 +28,38 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
     String TAG = "wsy";
-    TextView textView;
-
+//    TextView textView;
+    PwdIndicator pwdIndicator;
+    NumberKeyBoxView numberKeyBoxView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        textView = findViewById(R.id.textView);
-        simpleRX_Retrofit();
+        setContentView(R.layout.activity_home);
+//        pwdIndicator=findViewById(R.id.pwdindicator);
+//        pwdIndicator.initIndicator(6);
+//        findViewById(R.id.add).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                pwdIndicator.add();
+//            }
+//        });
+//        findViewById(R.id.remove).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                pwdIndicator.remove();
+//            }
+//        });
+        numberKeyBoxView=findViewById(R.id.numberkeyboxview);
+        numberKeyBoxView.setNumberKeyBoxViewClick(new NumberKeyBoxView.NumberKeyBoxViewClick() {
+            @Override
+            public void click(String value) {
+                Log.i(TAG,value);
+            }
+        });
+//        textView = findViewById(R.id.textView);
+//        simpleRX_Retrofit();
     }
 
     /**
