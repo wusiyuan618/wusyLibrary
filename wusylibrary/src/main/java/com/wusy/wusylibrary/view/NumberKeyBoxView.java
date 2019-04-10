@@ -86,7 +86,6 @@ public class NumberKeyBoxView extends View implements View.OnTouchListener {
         super.onDraw(canvas);
         //数据组装
         if(coordinates.size()==0) dataInit();//防止作为POP显示时，重复绘制
-
         //开始绘制
         drawKeyBoxView(canvas);
     }
@@ -95,47 +94,57 @@ public class NumberKeyBoxView extends View implements View.OnTouchListener {
      */
     private void dataInit(){
         for(int i=1;i<10;i++){
-            int widthIndex=(i%3)==0 ? 3 : (i%3);//当前行数
-            int heightIndex=(i-1)==0? 1:(i-1)/3+1;//当前列数
+            int column=(i%3)==0 ? 3 : (i%3);//当前列数
+            int row=(i-1)==0? 1:(i-1)/3+1;//当前行数
             //绘制宫格
             Coordinate coordinate=new Coordinate(
-                    widthIndex*mBaseInterval+(widthIndex-1)*mRectWidth,
-                    mBaseInterval*heightIndex+(heightIndex-1)*mRectHeight,
-                    widthIndex*(mBaseInterval+mRectWidth),
-                    (mBaseInterval +mRectHeight)* heightIndex,
-                    i+"",
-                    mRectWidth/2+mBaseInterval*widthIndex+mRectWidth*(widthIndex-1),
-                    mRectHeight/2+(mFontSize/3+mBaseInterval*heightIndex)+(heightIndex-1)*mRectHeight
-            );
+                    left(column), top(row),
+                    right(column), bottom(row), i+"",
+                    centerX(column), centetY(row));
             coordinates.add(coordinate);
         }
         //0键
-        Coordinate coordinate0=new Coordinate(2*mBaseInterval + mRectWidth,
-                4*mBaseInterval + 3 * mRectHeight,
-                2*mBaseInterval + 2 * mRectWidth,
-                4*mBaseInterval + 4 * mRectHeight,
-                "0",
-                mRectWidth/2+mBaseInterval*2+mRectWidth,
-                mRectHeight/2+(mFontSize/3+mBaseInterval*4)+3*mRectHeight);
+        Coordinate coordinate0=new Coordinate(
+                left(2), top(4),
+                right(2), bottom(4), "0",
+                centerX(2), centetY(4));
         coordinates.add(coordinate0);
         //删除键
-        Coordinate coordinateDelete=new Coordinate(mBaseInterval,
-                4*mBaseInterval + 3 * mRectHeight,
-                mBaseInterval + mRectWidth,
-                4*mBaseInterval + 4 * mRectHeight,
-                "delete",
-                mRectWidth/2-30,
-                mRectHeight/2+(mFontSize/3+mBaseInterval*4)+3*mRectHeight-40);
+        Coordinate coordinateDelete=new Coordinate(
+                left(1), top(4),
+                right(1), bottom(4), "delete",
+                centerX(1)-40, centetY(4)-40);
         coordinates.add(coordinateDelete);
         //确定键
-        Coordinate coordinateOk=new Coordinate(3*mBaseInterval + 2 * mRectWidth,
-                4*mBaseInterval + 3 * mRectHeight,
-                3*mBaseInterval + 3 * mRectWidth,
-                4*mBaseInterval + 4 * mRectHeight,
-                "ok",
-                mRectWidth/2+mBaseInterval*3+mRectWidth*2-30,
-                mRectHeight/2+(mFontSize/3+mBaseInterval*4)+3*mRectHeight-40);
+        Coordinate coordinateOk=new Coordinate(
+                left(3), top(4),
+                right(3), bottom(4), "ok",
+                centerX(3)-40, centetY(4)-40);
         coordinates.add(coordinateOk);
+    }
+
+    /**
+     * 位置坐标以及中心点坐标运算算法
+     * @param column
+     * @return
+     */
+    private float left(int column){
+        return column*mBaseInterval+(column-1)*mRectWidth;
+    }
+    private float top(int row){
+        return mBaseInterval*row+(row-1)*mRectHeight;
+    }
+    private float right(int column){
+        return column*(mBaseInterval+mRectWidth);
+    }
+    private float bottom(int row){
+        return (mBaseInterval +mRectHeight)* row;
+    }
+    private float centerX(int column){
+        return mRectWidth/2+mBaseInterval*column+mRectWidth*(column-1);
+    }
+    private float centetY(int row){
+        return mRectHeight/2+(mFontSize/3+mBaseInterval*row)+(row-1)*mRectHeight;
     }
     /**
      * 绘制函数
