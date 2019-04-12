@@ -1,11 +1,5 @@
-package com.wusy.wusyproject.retrofit;
-
-/**
- * Created by XIAO RONG on 2019/3/27.
- */
-
+package com.wusy.wusylibrary.util.retrofit;
 public class LoginBean {
-
     /**
      * result : LTgMDgwMzcMTANjgNjQNTA
      * str : 登录成功

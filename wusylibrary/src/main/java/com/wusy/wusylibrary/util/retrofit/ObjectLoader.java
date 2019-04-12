@@ -1,4 +1,4 @@
-package com.wusy.wusyproject.retrofit;
+package com.wusy.wusylibrary.util.retrofit;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;

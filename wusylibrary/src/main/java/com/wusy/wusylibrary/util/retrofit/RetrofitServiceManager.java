@@ -1,4 +1,5 @@
-package com.wusy.wusyproject.retrofit;
+package com.wusy.wusylibrary.util.retrofit;
+
 import com.jkyeo.basicparamsinterceptor.BasicParamsInterceptor;
 
 import java.util.concurrent.TimeUnit;

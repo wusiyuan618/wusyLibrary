@@ -1,5 +1,4 @@
-package com.wusy.wusyproject.retrofit;
-
+package com.wusy.wusylibrary.util.retrofit;
 import io.reactivex.Observable;
 
 /**
@@ -9,9 +8,9 @@ import io.reactivex.Observable;
  * 在这里，只需要对observable做个性化的数据操作，统一配置放在ObjectLoader中
  */
 
-public class PersonAPILoader extends ObjectLoader {
+public class APILoader extends ObjectLoader {
     private PersonAPI mPersonAPI;
-    public PersonAPILoader(){
+    public APILoader(){
         mPersonAPI=RetrofitServiceManager.getInstance().create(PersonAPI.class);
     }
     public Observable<LoginBean> login(String name,String pwd){

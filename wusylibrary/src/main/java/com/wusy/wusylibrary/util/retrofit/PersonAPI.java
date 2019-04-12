@@ -1,5 +1,4 @@
-package com.wusy.wusyproject.retrofit;
-
+package com.wusy.wusylibrary.util.retrofit;
 import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.GET;
