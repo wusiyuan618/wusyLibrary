@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -28,6 +29,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 import okio.Buffer;
 import okio.BufferedSink;
 import okio.Okio;
@@ -58,9 +60,15 @@ public class OkHttpUtil {
     }
 
     private void init() {
-        mOkHttpClient = new OkHttpClient();
         //2018-5-9增加了超时限制 wusy
-        mOkHttpClient.newBuilder().connectTimeout(30000, TimeUnit.SECONDS);
+        HttpLoggingInterceptor loggingInterceptor=new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS);//设置日志显示级别
+        mOkHttpClient = new OkHttpClient().newBuilder()
+                .connectTimeout(30000, TimeUnit.SECONDS)
+                .addInterceptor(loggingInterceptor)
+                .build();
+
+
     }
 
     /**
@@ -71,13 +79,18 @@ public class OkHttpUtil {
      * @param activity
      * @param callback 请求结果回调
      */
-    public void asynGet(String url, final Activity activity,String token,
+    public void asynGet(String url, final Activity activity, HashMap<String,String> headers,
                         final ResultCallBack callback) {
         showLog("正在进行Get请求，url：" + url);
-        final Request request = new Request.Builder()
-                .url(url)
-                .addHeader("token",token)
-                .build();
+        Request.Builder builder = new Request.Builder()
+                .url(url);
+        if(headers!=null){
+            for (String key : headers.keySet()) {
+                Log.i("wsy","key="+key+"\nvalue="+headers.get(key));
+                builder=builder.addHeader(key,headers.get(key));
+            }
+        }
+        final Request request=builder.build();
         deliveryResult(callback, request, activity);
     }
 
@@ -96,11 +109,11 @@ public class OkHttpUtil {
             return null;
         }
     }
-    public void asynGet(String url, String token,final ResultCallBack callback) {
-        asynGet(url,null,token,callback);
+    public void asynGet(String url, HashMap<String,String> headers,final ResultCallBack callback) {
+        asynGet(url,null,headers,callback);
     }
     public void asynGet(String url, final ResultCallBack callback) {
-        asynGet(url,null,"",callback);
+        asynGet(url,null,null,callback);
     }
 
     /**
@@ -385,6 +398,7 @@ public class OkHttpUtil {
 
             Call call = mOkHttpClient.newCall(request);
         call.enqueue(new Callback() {
+
             @Override
             public void onFailure(final Call call, final IOException e) {
                 if(activity!=null) {
@@ -403,17 +417,17 @@ public class OkHttpUtil {
 
             @Override
             public void onResponse(final Call call, final Response response) throws IOException {
-                final String responseStr=response.body().string();
-                LogUtil.i(LOGTAG, "请求成功，获取到的数据是---"+responseStr);
+//                final String responseStr=response.body().string();
+
                 if(activity!=null){
                     activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            callback.successListener(call,responseStr);
+                            callback.successListener(call,response);
                         }
                     });
                 }else{
-                    callback.successListener(call,responseStr);
+                    callback.successListener(call,response);
                 }
             }
         });
@@ -542,7 +556,7 @@ public class OkHttpUtil {
      * get、post请求回调
      */
     public interface ResultCallBack {
-        void successListener(Call call, String responseStr);
+        void successListener(Call call,Response response);
 
         void failListener(Call call, IOException e);
     }

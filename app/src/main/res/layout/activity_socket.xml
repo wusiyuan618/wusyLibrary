@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/btn_start_server"
+        android:layout_width="match_parent"
+        android:layout_marginTop="30dp"
+        android:text="启动服务器"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_start_client"
+        android:layout_width="match_parent"
+        android:layout_marginTop="30dp"
+        android:text="启动客户端"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_send_client"
+        android:layout_width="match_parent"
+        android:layout_marginTop="30dp"
+        android:text="发送数据(123)给客户端"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_send_server"
+        android:layout_width="match_parent"
+        android:layout_marginTop="30dp"
+        android:text="发送数据(321)给服务器"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/tv_server"
+        android:layout_width="match_parent"
+        android:layout_marginTop="30dp"
+        android:singleLine="true"
+        android:text="服务器收到:"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/tv_client"
+        android:layout_width="match_parent"
+        android:layout_marginTop="30dp"
+        android:singleLine="true"
+        android:text="客户端收到:"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
