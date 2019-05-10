@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/WusyProject.iml" filepath="$PROJECT_DIR$/.idea/WusyProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/WusyProject.iml" filepath="$PROJECT_DIR$/WusyProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/wusylibrary/wusylibrary.iml" filepath="$PROJECT_DIR$/wusylibrary/wusylibrary.iml" />
