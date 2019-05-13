@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
+import com.orhanobut.logger.Logger;
 import com.wusy.wusyproject.R;
 
 import java.net.Inet4Address;
@@ -37,8 +38,6 @@ public class SocketActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_socket);
-
-
         btnStartServer = findViewById(R.id.btn_start_server);
         btnSrartClient = findViewById(R.id.btn_start_client);
         btnSendToServer = findViewById(R.id.btn_send_server);
