@@ -11,21 +11,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import com.wusy.wusylibrary.util.OkHttpUtil;
 import com.wusy.wusyproject.R;
 
-import java.io.IOException;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
-
-import okhttp3.Call;
-import okhttp3.Response;
-
 public class SocketActivity extends AppCompatActivity {
 
     Button btnStartServer;

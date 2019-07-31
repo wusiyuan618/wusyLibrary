@@ -5,20 +5,11 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
-
-import com.wusy.wusylibrary.util.OkHttpUtil;
-import com.wusy.wusylibrary.util.retrofit.RxRtTestUtil;
-
-import org.w3c.dom.Text;
-
-import java.io.IOException;
 import java.text.DecimalFormat;
-import java.util.HashMap;
 
-import okhttp3.Call;
-import okhttp3.Response;
+
+
 
 
 public class MainActivity extends AppCompatActivity{

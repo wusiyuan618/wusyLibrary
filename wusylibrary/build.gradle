@@ -30,8 +30,8 @@ dependencies {
     //    androidTestImplementation 'com.android.support.test:runner:1.0.1'
     //    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
-    api 'com.squareup.okhttp3:okhttp:3.2.0'//OkHttp3
-    api 'com.squareup.okio:okio:1.7.0'//OkHttp3
+    implementation 'com.squareup.okhttp3:okhttp:3.2.0'//OkHttp3
+    implementation 'com.squareup.okio:okio:1.7.0'//OkHttp3
     implementation 'com.afollestad.material-dialogs:core:0.9.1.0'//materialDialog，用于快捷实现各种Dialog弹窗
     implementation 'com.afollestad.material-dialogs:commons:0.9.1.0'//materialDialog，用于快捷实现各种Dialog弹窗
     //noinspection GradleCompatible
@@ -49,7 +49,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'//转换器，请求结果转换成Model
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'//配合Rxjava 使用
     implementation 'com.github.jkyeo:okhttp-basicparamsinterceptor:v0.9'
-    api 'com.orhanobut:logger:2.2.0'//Logger
+    implementation 'com.orhanobut:logger:2.2.0'//Logger
     implementation files('libs/Msc.jar')
     implementation files('libs/libthrift-0.10.0.jar')
     implementation files('libs/mid-sdk-3.73.jar')
