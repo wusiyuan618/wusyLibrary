@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 
 /**
  * Created by XIAO RONG on 2018/7/18.
+ * 直接测量RecyclerView的最大长度，用于嵌套ScrollView
  */
 
 public class NestRecyclerView extends RecyclerView {

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
 import com.wusy.wusylibrary.R;
 
 /**
@@ -58,15 +59,13 @@ public class LoadingViewUtil {
     public Dialog createLoadingDialog(Context context,String msg){
         return createLoadingDialog(context,msg,false);
     }
+
+    /**
+     * 显示指定Dialog
+     * @param dialog
+     */
     public void showDialog(Dialog dialog){
         if(dialog!=null){
-//            Window window = dialog.getWindow();
-//            WindowManager.LayoutParams lp = window.getAttributes();
-//            lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-//            lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-//            window.setGravity(Gravity.CENTER);
-//            window.setAttributes(lp);
-//            window.setWindowAnimations(R.style.PopWindowAnimStyle);
             try {
                 dialog.show();
             }catch (Exception  e){
@@ -74,6 +73,12 @@ public class LoadingViewUtil {
             }
         }
     }
+
+
+    /**
+     * 关闭指定dialog
+     * @param dialog
+     */
     public void dismissDialog(Dialog dialog){
         try {
             if (dialog != null && dialog.isShowing()) dialog.dismiss();
