@@ -18,6 +18,6 @@ allprojects {
 setp 2:
 ```
 dependencies {
-	        implementation 'com.github.wusiyuan618:wusyLibrary:Tag'
+	        implementation 'com.github.wusiyuan618:wusyLibrary:xx'
 	}
 ```
