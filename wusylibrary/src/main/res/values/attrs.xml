@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ColorCircleProgressView">
+        <!--定义圆环的渐变颜色-->
+        <attr format="color" name="color_start"/>
+        <attr format="color" name="color_mid_1"/>
+        <attr format="color" name="color_mid_2"/>
+        <attr format="color" name="color_mid_3"/>
+        <attr format="color" name="color_mid_4"/>
+        <attr format="color" name="color_end"/>
+        <!--定义圆环角度及开始位置的角度,圆环到view边框的距离-->
+        <attr format="integer" name="ViewAngle"/>
+        <attr format="integer" name="StartAngle"/>
+        <attr format="dimension" name="view_padding"/>
+        <!--定义圆环的大小，是否圆角-->
+        <attr format="dimension" name="circle_stroke_width"/>
+        <attr format="boolean" name="round"/>
+        <!--定义游标的大小和颜色 -->
+        <attr format="color" name="point_color"/>
+        <attr format="dimension" name="point_radio"/>
+        <attr format="reference" name="point_src"/>
+        <attr format="reference" name="point_popup"/>
+        <!--<attr name="point_popup_text" format="string"/>-->
+        <!--定义刻度标尺 是否显示刻度盘-->
+        <attr format="boolean" name="show_dial"/>
+        <attr format="color" name="dial_color"/>
+        <attr format="integer" name="dial_count"/>
+        <attr format="dimension" name="dial_text_size"/>
+        <attr format="dimension" name="dial_height"/>
+        <attr format="dimension" name="dial_pad"/>
+        <attr format="boolean" name="isDial"/>
+        <attr format="integer" name="dial_min_value"/>
+        <attr format="integer" name="dial_max_value"/>
+    </declare-styleable>
+
+    <declare-styleable name="TempControlView">
+        <!--按钮的图片-->
+        <attr format="reference" name="button_src"/>
+        <!--按钮的阴影-->
+        <attr format="reference" name="button_shadow_src"/>
+        <!--刻度盘和按钮之间的距离-->
+        <attr format="dimension" name="dial_padding"/>
+        <!--刻度盘选中的颜色-->
+        <attr format="color" name="dial_select_color"/>
+        <!--刻度盘的颜色-->
+        <attr format="color" name="dial_original_color"/>
+
+        <attr format="dimension" name="scale_height"/>
+    </declare-styleable>
+</resources>
