@@ -24,9 +24,4 @@ public interface IBaseMVPView {
      * 关闭Progress
      */
     void closeProgress();
-    /**
-     * 更新List，展现数据
-     */
-    void showList(BaseAdapter adapter);
-    void showList(RecyclerView.Adapter<RecyclerView.ViewHolder> adapter);
 }
