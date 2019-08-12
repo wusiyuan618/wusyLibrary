@@ -12,12 +12,12 @@ import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.provider.MediaStore;
 
+import com.orhanobut.logger.Logger;
 import com.wusy.wusylibrary.bean.AppInfo;
 import com.wusy.wusylibrary.bean.FileBean;
 import com.wusy.wusylibrary.bean.ImgFolderBean;
 import com.wusy.wusylibrary.bean.Music;
 import com.wusy.wusylibrary.bean.Video;
-import com.wusy.wusylibrary.util.LogUtil;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -196,7 +196,7 @@ public class FileManager {
                             continue;
                         }
                         if (file.getName().contains(name)) {
-                            LogUtil.e("-----------"+file.getName());
+                            Logger.e("-----------"+file.getName());
 
                             FileBean fileBean = new FileBean(file.getPath(), FileUtils.getFileIconByPath(file.getPath()));
                             fileBeans.add(fileBean);

@@ -6,17 +6,16 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.orhanobut.logger.Logger;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.wusy.wusylibrary.R;
 import com.wusy.wusylibrary.util.ActivityAnimUtil;
 import com.wusy.wusylibrary.util.ActivityManager;
 import com.wusy.wusylibrary.util.CommonUtil;
-import com.wusy.wusylibrary.util.LogUtil;
 import com.wusy.wusylibrary.util.MTAUtil;
 import com.wusy.wusylibrary.util.StatusBarUtil;
 
@@ -80,7 +79,7 @@ public abstract class BaseActivity extends AppCompatActivity{
                     layout.setFitsSystemWindows(true);
                     layout.setBackgroundColor(getResources().getColor(R.color.titleViewBackgroundColor));
                 }catch (Exception e){
-                    LogUtil.e("该Activity没有为首层Layout添加id--layout_total，无法管理状态栏。");
+                    Logger.e("该Activity没有为首层Layout添加id--layout_total，无法管理状态栏。");
                 }
             }
         }
@@ -93,40 +92,40 @@ public abstract class BaseActivity extends AppCompatActivity{
     @Override
     protected void onRestart() {
         super.onRestart();
-        LogUtil.d(getComponentName().getClassName()+"执行onRestart");
+        Logger.d(getComponentName().getClassName()+"执行onRestart");
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        LogUtil.d(getComponentName().getClassName()+"执行onStart");
+        Logger.d(getComponentName().getClassName()+"执行onStart");
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        LogUtil.d(getComponentName().getClassName()+"执行onResume");
+        Logger.d(getComponentName().getClassName()+"执行onResume");
         MTAUtil.getInstance().MATPageStatistics(this,true,TAG);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        LogUtil.d(getComponentName().getClassName()+"执行onPause");
+        Logger.d(getComponentName().getClassName()+"执行onPause");
         MTAUtil.getInstance().MATPageStatistics(this,false,TAG);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        LogUtil.d(getComponentName().getClassName()+"执行onStop");
+        Logger.d(getComponentName().getClassName()+"执行onStop");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        LogUtil.d(getComponentName().getClassName()+"执行onDestroy");
+        Logger.d(getComponentName().getClassName()+"执行onDestroy");
         ActivityManager.getInstance().removeActivity(this);
         if(broadcastReceiver!=null) unregisterReceiver(broadcastReceiver);
     }
@@ -136,7 +135,7 @@ public abstract class BaseActivity extends AppCompatActivity{
      * @param info
      */
     public void showLogInfo(String info){
-        LogUtil.i(TAG,info);
+        Logger.i(info);
     }
 
     /**
@@ -145,7 +144,7 @@ public abstract class BaseActivity extends AppCompatActivity{
      */
     public void showLogError(String error){
         try {
-            LogUtil.e(TAG, error);
+            Logger.e(error);
         }catch (Exception ignored){
 
         }

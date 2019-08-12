@@ -22,6 +22,10 @@ android {
             jniLibs.srcDirs=["libs"]
         }
     }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
 
 }
 dependencies {
@@ -46,14 +50,13 @@ dependencies {
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-7'//用于给任意列表View或者其他View添加上拉下拉刷新动画
     implementation 'com.android.support:design:28.0.0'//design包
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'//导入retrofit
-    implementation'com.squareup.okhttp3:logging-interceptor:3.10.0'//retrofit日志拦截器
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'//retrofit日志拦截器
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'//RXAndroid
     implementation 'io.reactivex.rxjava2:rxjava:2.x.y'//RXJAVA
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'//转换器，请求结果转换成Model
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'//配合Rxjava 使用
     implementation 'com.github.jkyeo:okhttp-basicparamsinterceptor:v0.9'
     implementation 'com.orhanobut:logger:2.2.0'//Logger
-    implementation files('libs/Msc.jar')
     implementation files('libs/libthrift-0.10.0.jar')
     implementation files('libs/mid-sdk-3.73.jar')
     implementation files('libs/mta-android-sdk-3.4.3.jar')

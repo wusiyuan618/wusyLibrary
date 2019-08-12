@@ -7,6 +7,8 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.orhanobut.logger.Logger;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -86,7 +88,7 @@ public class AudioRecoderUtils {
             if (mMediaRecorder == null)
                 return 0L;
             endTime = System.currentTimeMillis();
-            LogUtil.i("ACTION_END", "endTime" + endTime);
+            Logger.i("endTime" + endTime);
             mMediaRecorder.stop();
             initMediaRecorder();
             return endTime - startTime;

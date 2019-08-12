@@ -39,7 +39,7 @@ public class LoadingViewUtil {
         TextView tipTextView = (TextView) v.findViewById(R.id.tipTextView);// 提示文字
         tipTextView.setText(msg);// 设置加载信息
 
-        Dialog loadingDialog = new Dialog(context, R.style.MyDialogStyle);// 创建自定义样式dialog
+        Dialog loadingDialog = new Dialog(context, R.style.UploadDialogStyle);// 创建自定义样式dialog
         loadingDialog.setCancelable(true); // 是否可以按“返回键”消失
         loadingDialog.setCanceledOnTouchOutside(isClick); // 点击加载框以外的区域
         loadingDialog.setContentView(layout, new LinearLayout.LayoutParams(
@@ -69,7 +69,7 @@ public class LoadingViewUtil {
             try {
                 dialog.show();
             }catch (Exception  e){
-                LogUtil.e("LoadingViewUtil","显示加载动画发生了异常"+e.getLocalizedMessage());
+                Logger.e("显示加载动画发生了异常"+e.getLocalizedMessage());
             }
         }
     }
@@ -84,7 +84,7 @@ public class LoadingViewUtil {
             if (dialog != null && dialog.isShowing()) dialog.dismiss();
         }catch (Exception e) {
             e.printStackTrace();
-            LogUtil.e("LoadingViewUtil","关闭加载动画发生了异常"+e.getLocalizedMessage());
+            Logger.e("关闭加载动画发生了异常"+e.getLocalizedMessage());
         }
     }
 }

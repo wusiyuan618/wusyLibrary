@@ -9,6 +9,8 @@ import android.net.Uri;
 import android.provider.MediaStore.Images;
 import android.util.Log;
 
+import com.orhanobut.logger.Logger;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -115,7 +117,7 @@ public class ImageCompress {
         try {
             stream = new FileOutputStream(compressOptions.destFile);
         } catch (FileNotFoundException e) {
-            LogUtil.e("ImageCompress", e.getMessage());
+            Logger.e(e, e.getMessage());
         }
  
         bitmap.compress(compressOptions.imgFormat, compressOptions.quality,

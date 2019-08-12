@@ -3,6 +3,8 @@ package com.wusy.wusylibrary.util;
 import android.app.Activity;
 import android.util.Log;
 
+import com.orhanobut.logger.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,13 +31,13 @@ public class ActivityManager {
         list.remove(activity);
     }
     public void finishAllActivity(){
-        LogUtil.i("msg","当前Activity数----"+list.size());
+        Logger.i("当前Activity数----"+list.size());
         try {
             for (Activity ac:list) {
                 if (ac != null) ac.finish();
             }
         }catch (Exception e){
-            LogUtil.e(e);
+            Logger.e(e,"error");
         }
     }
 }

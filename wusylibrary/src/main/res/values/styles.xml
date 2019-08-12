@@ -24,7 +24,7 @@
         <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
     </style>
     <!-- LoadingViewUtil的Style -->
-    <style name="MyDialogStyle">
+    <style name="UploadDialogStyle">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowFrame">@null</item>
         <item name="android:windowNoTitle">true</item>

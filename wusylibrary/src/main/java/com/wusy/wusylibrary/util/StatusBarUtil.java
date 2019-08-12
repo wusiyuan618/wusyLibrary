@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.orhanobut.logger.Logger;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import java.lang.reflect.Field;
@@ -149,7 +150,7 @@ public class StatusBarUtil {
                 window.setAttributes(lp);
                 result = true;
             } catch (Exception e) {
-                LogUtil.e(e);
+                Logger.e(e,"error");
             }
         }
         return result;
@@ -179,7 +180,7 @@ public class StatusBarUtil {
                 }
                 result = true;
             } catch (Exception e) {
-                LogUtil.e(e);
+                Logger.e(e,"error");
             }
         }
         return result;

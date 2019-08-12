@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.orhanobut.logger.Logger;
 import com.wusy.wusylibrary.R;
 
 import java.util.ArrayList;
@@ -132,7 +133,7 @@ public class MaterialDialogsUtil {
                 .itemsCallbackSingleChoice(0, new MaterialDialog.ListCallbackSingleChoice() {//0 表示第一个选中 -1 不选
                     @Override
                     public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
-                        LogUtil.i("msg", "点击的是+" + text + "position是" + which);
+                        Logger.i("点击的是+" + text + "position是" + which);
                         return true;
                     }
                 });
@@ -158,7 +159,7 @@ public class MaterialDialogsUtil {
                     @Override
                     public boolean onSelection(MaterialDialog dialog, Integer[] which, CharSequence[] text) {
                         for (CharSequence a : text) {
-                            LogUtil.i("msg", "选中了" + a);
+                            Logger.i( "选中了" + a);
                         }
                         return true;//false 的时候没有选中样式
                     }
@@ -184,7 +185,7 @@ public class MaterialDialogsUtil {
                 .input(R.string.input_hint, R.string.input_prefill, new MaterialDialog.InputCallback() {
                     @Override
                     public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
-                        LogUtil.i("msg", "输入的是：" + input);
+                        Logger.i( "输入的是：" + input);
                     }
                 });
     }

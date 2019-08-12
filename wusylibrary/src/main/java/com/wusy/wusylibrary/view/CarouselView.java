@@ -16,9 +16,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
 import com.wusy.wusylibrary.R;
 import com.wusy.wusylibrary.util.ImageLoaderUtil;
-import com.wusy.wusylibrary.util.LogUtil;
 
 import java.util.ArrayList;
 
@@ -217,7 +217,7 @@ public class CarouselView extends LinearLayout implements ViewPager.OnPageChange
             ll_point.addView(pointView, layoutParams);
         }
         if(imageViews.size()<=1)viewPager.setOffscreenPageLimit(0);
-        if(imageViews.size()>0) LogUtil.i(TAG,"initView完成");
+        if(imageViews.size()>0) Logger.i("initView完成");
     }
 
     /**

@@ -1,5 +1,7 @@
 package com.wusy.wusylibrary.util;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
 import android.os.Environment;
 
 import java.io.File;
@@ -72,5 +74,19 @@ public class CommonUtil {
         String [] names = packageName.split("\\.");
         String name=names[names.length-1];
         return name;
+    }
+    /**
+     * 判断网络是否可用
+     *
+     * @param context
+     * @return
+     */
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (cm != null && cm.getActiveNetworkInfo() != null) {
+            return cm.getActiveNetworkInfo().isAvailable();
+        }
+        return false;
     }
 }

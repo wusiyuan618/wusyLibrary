@@ -11,6 +11,8 @@ import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.orhanobut.logger.Logger;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -324,9 +326,9 @@ public class OkHttpUtil {
     public void judeFileExists(File file) {
 
         if (file.exists()) {
-            LogUtil.i(LOGTAG,"file exists");
+            Logger.i("file exists");
         } else {
-            LogUtil.i(LOGTAG,"file not exists, create it ...");
+            Logger.i("file not exists, create it ...");
             try {
                 file.createNewFile();
             } catch (IOException e) {
@@ -343,12 +345,12 @@ public class OkHttpUtil {
 
         if (file.exists()) {
             if (file.isDirectory()) {
-                LogUtil.i(LOGTAG,"dir exists");
+                Logger.i("dir exists");
             } else {
-                LogUtil.i(LOGTAG,"the same name file exists, can not create dir");
+                Logger.i("the same name file exists, can not create dir");
             }
         } else {
-            LogUtil.i(LOGTAG,"dir not exists, create it ...");
+            Logger.i("dir not exists, create it ...");
             file.mkdir();
         }
 
@@ -384,7 +386,7 @@ public class OkHttpUtil {
      * @param msg 需要打印的内容
      */
     private void showLog(String msg) {
-        LogUtil.i(LOGTAG, msg);
+        Logger.i(msg);
     }
 
     /**
@@ -405,12 +407,12 @@ public class OkHttpUtil {
                     activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            LogUtil.e(LOGTAG, "请求失败，错误信息：" + e.getLocalizedMessage());
+                            Logger.e( "请求失败，错误信息：" + e.getLocalizedMessage());
                             callback.failListener(call, e);
                         }
                     });
                 }else{
-                    LogUtil.e(LOGTAG, "请求失败，错误信息：" + e.getLocalizedMessage());
+                    Logger.e( "请求失败，错误信息：" + e.getLocalizedMessage());
                     callback.failListener(call, e);
                 }
             }
@@ -481,7 +483,7 @@ public class OkHttpUtil {
                 String type = getMIMEType(f);
       /* 设置intent的file与MimeType */
                 if(Build.VERSION.SDK_INT>=24){
-                    Uri contenturi=FileProvider.getUriForFile(context, "com.mintu.dcdb.fileprovider",f);
+                    Uri contenturi=FileProvider.getUriForFile(context, "com.wusy.fileprovider",f);
                     intent.setDataAndType(contenturi,type);
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, contenturi);
                     intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -492,7 +494,6 @@ public class OkHttpUtil {
             }
         } catch (Exception e) {
             Toast.makeText(context,"打开附件---"+f.getName()+"，发生了错误",Toast.LENGTH_SHORT).show();
-//            LogUtil.e(LOGTAG, "打开附件" + f.getName() + "报错了，错误是-----" + e.getMessage());
         }
     }
     /**

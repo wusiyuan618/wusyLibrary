@@ -7,7 +7,7 @@ import android.content.Context;
 import android.view.View;
 import android.widget.PopupWindow;
 
-import com.wusy.wusylibrary.util.LogUtil;
+import com.orhanobut.logger.Logger;
 
 
 public class CommonPopupWindow extends PopupWindow {
@@ -37,7 +37,7 @@ public class CommonPopupWindow extends PopupWindow {
         super.dismiss();
         controller.setBackGroundLevel(1.0f);
         }catch (Exception e){
-            LogUtil.e(e);
+            Logger.e(e,"error");
         }
     }
 
