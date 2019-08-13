@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -118,14 +119,12 @@ public class BottomSelectView extends LinearLayout {
             inearLayout.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (bean.getTitle()!=null ) {
+                        changeSelectItem(list, bean);
+                        changeShowFragment(layout, list, bean, manager);
+                    }
                     if (CommonUtil.isNull(bean.getListener())) {
-                        if (bean.getTitle()!=null ) {
-                            changeSelectItem(list, bean);
-                            changeShowFragment(layout, list, bean, manager);
-                        }
-
                         bean.getListener().clickListener();
-
                     }
                 }
             });
