@@ -2,6 +2,7 @@ package com.wusy.wusylibrary.base;
 
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
@@ -96,39 +97,6 @@ public abstract class BaseActivity extends AppCompatActivity{
     public abstract void init();
 
     @Override
-    protected void onRestart() {
-        super.onRestart();
-        Logger.d(getComponentName().getClassName()+"执行onRestart");
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Logger.d(getComponentName().getClassName()+"执行onStart");
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Logger.d(getComponentName().getClassName()+"执行onResume");
-        MTAUtil.getInstance().MATPageStatistics(this,true,TAG);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Logger.d(getComponentName().getClassName()+"执行onPause");
-        MTAUtil.getInstance().MATPageStatistics(this,false,TAG);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Logger.d(getComponentName().getClassName()+"执行onStop");
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
         Logger.d(getComponentName().getClassName()+"执行onDestroy");
@@ -193,5 +161,9 @@ public abstract class BaseActivity extends AppCompatActivity{
     }
     public void setLoadDialogMsg(String msg){
         loadingViewUtil.setLoadMsg(loadDialog,msg);
+    }
+    public void navigateTo(Class toClass){
+        Intent intent=new Intent(this,toClass);
+        startActivity(intent);
     }
 }

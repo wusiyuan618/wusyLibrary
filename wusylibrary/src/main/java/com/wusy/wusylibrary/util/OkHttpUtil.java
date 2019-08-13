@@ -3,6 +3,7 @@ package com.wusy.wusylibrary.util;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ParseException;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
@@ -11,12 +12,17 @@ import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.gson.JsonParseException;
 import com.orhanobut.logger.Logger;
+
+import org.json.JSONException;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +42,7 @@ import okio.Buffer;
 import okio.BufferedSink;
 import okio.Okio;
 import okio.Source;
+import retrofit2.HttpException;
 
 
 /**
@@ -403,17 +410,27 @@ public class OkHttpUtil {
 
             @Override
             public void onFailure(final Call call, final IOException e) {
+                String message="";
+                Logger.e( "请求失败，错误信息：" + e.getLocalizedMessage());
+                if (e instanceof SocketTimeoutException) {
+                    message = "网络连接超时";
+                } else if (e instanceof ConnectException) {
+                    message = "连接失败";
+                } else if (e instanceof IOException) {
+                    message = "网络错误";
+                } else if (e instanceof javax.net.ssl.SSLHandshakeException) {
+                    message = "证书验证失败";
+                } else {
+                    message = "未知错误";
+                }
                 if(activity!=null) {
-                    activity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Logger.e( "请求失败，错误信息：" + e.getLocalizedMessage());
-                            callback.failListener(call, e);
-                        }
+                    String finalMessage = message;
+                    activity.runOnUiThread(() -> {
+                        callback.failListener(call, e, finalMessage);
                     });
                 }else{
                     Logger.e( "请求失败，错误信息：" + e.getLocalizedMessage());
-                    callback.failListener(call, e);
+                    callback.failListener(call, e,message);
                 }
             }
 
@@ -559,7 +576,7 @@ public class OkHttpUtil {
     public interface ResultCallBack {
         void successListener(Call call,Response response);
 
-        void failListener(Call call, IOException e);
+        void failListener(Call call, IOException e,String message);
     }
 
     /**

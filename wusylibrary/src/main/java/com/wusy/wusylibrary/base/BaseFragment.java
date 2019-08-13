@@ -2,6 +2,7 @@ package com.wusy.wusylibrary.base;
 
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -106,5 +107,9 @@ public abstract class BaseFragment extends Fragment {
     }
     public void setLoadDialogMsg(String msg){
         loadingViewUtil.setLoadMsg(loadDialog,msg);
+    }
+    public void navigateTo(Class toClass){
+        Intent intent=new Intent(getContext(),toClass);
+        startActivity(intent);
     }
 }
