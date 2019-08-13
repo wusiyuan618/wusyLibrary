@@ -1,5 +1,6 @@
 package com.wusy.wusylibrary.base;
 
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
 import android.os.Build;
@@ -16,6 +17,8 @@ import com.wusy.wusylibrary.R;
 import com.wusy.wusylibrary.util.ActivityAnimUtil;
 import com.wusy.wusylibrary.util.ActivityManager;
 import com.wusy.wusylibrary.util.CommonUtil;
+import com.wusy.wusylibrary.util.ImageLoaderUtil;
+import com.wusy.wusylibrary.util.LoadingViewUtil;
 import com.wusy.wusylibrary.util.MTAUtil;
 import com.wusy.wusylibrary.util.StatusBarUtil;
 
@@ -42,8 +45,9 @@ import java.util.ArrayList;
 public abstract class BaseActivity extends AppCompatActivity{
     public String TAG="";
     private IntentFilter intentFilter;
-    private SystemBarTintManager tintManager;
     private BroadcastReceiver broadcastReceiver;
+    private LoadingViewUtil loadingViewUtil;
+    private Dialog loadDialog;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +62,8 @@ public abstract class BaseActivity extends AppCompatActivity{
         //固定竖屏
 //        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         CommonUtil commonUtil = CommonUtil.getInstance();
+        loadingViewUtil=LoadingViewUtil.getInstance();
+        loadDialog=loadingViewUtil.createLoadingDialog(this,"");
         //为TAG赋值。值为类名
         TAG= commonUtil.getClassName(getComponentName().getClassName());
         //将Activity添加进管理器中
@@ -177,5 +183,9 @@ public abstract class BaseActivity extends AppCompatActivity{
             intentFilter.addAction(actions.get(i));
         }
         registerReceiver(broadcastReceiver, intentFilter);
+    }
+
+    public void showLoadImage(){
+
     }
 }

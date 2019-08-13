@@ -12,5 +12,5 @@ public interface IBaseMVPPresenter {
     /**
      * 提供Module
      */
-    IBaseMVPModle getModle();
+    IBaseMVPModel getModel();
 }

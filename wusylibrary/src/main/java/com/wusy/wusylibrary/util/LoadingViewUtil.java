@@ -87,4 +87,13 @@ public class LoadingViewUtil {
             Logger.e("关闭加载动画发生了异常"+e.getLocalizedMessage());
         }
     }
+    public void setLoadMsg(Dialog dialog,String msg){
+        try{
+            if (dialog != null){
+                ((TextView)(dialog.getCurrentFocus().findViewById(R.id.tipTextView))).setText(msg);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }

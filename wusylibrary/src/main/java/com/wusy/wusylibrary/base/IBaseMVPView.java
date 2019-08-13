@@ -14,14 +14,4 @@ public interface IBaseMVPView {
      * @return Context
      */
     Context getmContext();
-
-    /***
-     * 显示Progress
-     */
-    void showProgress();
-
-    /***
-     * 关闭Progress
-     */
-    void closeProgress();
 }
