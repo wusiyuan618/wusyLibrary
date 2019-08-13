@@ -40,7 +40,7 @@ public class UpdateService extends Service {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 
-		if (CommonUtil.getInstance().isNull(intent)) {
+		if (CommonUtil.isNull(intent)) {
 			stopSelf();
 			Log.d("UpService", intent + "--------------------");
 		} else {
@@ -48,8 +48,8 @@ public class UpdateService extends Service {
 			file_name = app_name + ".apk";
 			patchUrl = patchUrl + app_name + ".patch";
 			// 创建文件
-			CommonUtil.getInstance().createFile(app_name + ".patch");
-			CommonUtil.getInstance().createFile(file_name);
+			CommonUtil.createFile(app_name + ".patch");
+			CommonUtil.createFile(file_name);
 			updateFile = new File(updateDir + "/" + app_name + ".patch");
 			if(flag==1)flag=2;
 			broadCast = new Intent();

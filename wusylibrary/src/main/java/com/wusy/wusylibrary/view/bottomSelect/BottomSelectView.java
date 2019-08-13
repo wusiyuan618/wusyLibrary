@@ -37,7 +37,6 @@ public class BottomSelectView extends LinearLayout {
         this(context, null);
     }
 
-    private CommonUtil commonUtil;
 
     public BottomSelectView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
@@ -55,7 +54,7 @@ public class BottomSelectView extends LinearLayout {
     }
 
     private void init(Context context) {
-        commonUtil = CommonUtil.getInstance();
+
     }
 
     public List<BottomSelectBean> getList() {
@@ -119,7 +118,7 @@ public class BottomSelectView extends LinearLayout {
             inearLayout.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (!commonUtil.isNull(bean.getListener())) {
+                    if (CommonUtil.isNull(bean.getListener())) {
                         if (bean.getTitle()!=null ) {
                             changeSelectItem(list, bean);
                             changeShowFragment(layout, list, bean, manager);

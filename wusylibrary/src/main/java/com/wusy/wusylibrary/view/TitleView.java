@@ -23,7 +23,6 @@ public class TitleView extends LinearLayout {
     private LinearLayout ll_view,ll_backimg,ll_moreimg,ll_ok;
     private TextView tv_title,tv_ok;
     private ImageView img_back,img_more;
-    private CommonUtil commonUtil;
     private Animation outAnimation,enterAnimation;
     private Context mC;
     public TitleView(Context context) {
@@ -43,7 +42,6 @@ public class TitleView extends LinearLayout {
     }
 
     private void init() {
-        commonUtil=CommonUtil.getInstance();
     }
 
     private void findView(){
@@ -105,7 +103,7 @@ public class TitleView extends LinearLayout {
     public TitleView showMoreButton(boolean isShow,OnClickListener listener){
         if(isShow) {
             ll_moreimg.setVisibility(VISIBLE);
-            if (!commonUtil.isNull(listener)) ll_moreimg.setOnClickListener(listener);
+            if (CommonUtil.isNull(listener)) ll_moreimg.setOnClickListener(listener);
         }else{
             ll_moreimg.setVisibility(INVISIBLE);
         }
@@ -152,7 +150,7 @@ public class TitleView extends LinearLayout {
             tv_ok.setText(text);
             ll_ok.setVisibility(VISIBLE);
             ll_moreimg.setVisibility(GONE);
-            if (!commonUtil.isNull(listener)) ll_ok.setOnClickListener(listener);
+            if (CommonUtil.isNull(listener)) ll_ok.setOnClickListener(listener);
         }else{
             ll_ok.setVisibility(GONE);
         }

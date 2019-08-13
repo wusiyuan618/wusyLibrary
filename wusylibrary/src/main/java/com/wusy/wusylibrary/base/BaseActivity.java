@@ -62,11 +62,10 @@ public abstract class BaseActivity extends AppCompatActivity{
         setContentView(getContentViewId());
         //固定竖屏
 //        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        CommonUtil commonUtil = CommonUtil.getInstance();
         loadingViewUtil=LoadingViewUtil.getInstance();
         loadDialog=loadingViewUtil.createLoadingDialog(this,"");
         //为TAG赋值。值为类名
-        TAG= commonUtil.getClassName(getComponentName().getClassName());
+        TAG= CommonUtil.getClassName(getComponentName().getClassName());
         //将Activity添加进管理器中
         ActivityManager.getInstance().addActivity(this);
         //是否开启状态栏

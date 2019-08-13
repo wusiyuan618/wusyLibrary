@@ -13,18 +13,6 @@ import java.security.MessageDigest;
  */
 
 public class CommonUtil {
-    private static CommonUtil util;
-    private CommonUtil(){
-
-    }
-
-    public synchronized static CommonUtil getInstance(){
-        if(util==null){
-            util=new CommonUtil();
-        }
-        return util;
-    }
-
     /**
      * 创建apk文件 createFile(这里用一句话描述这个方法的作用) (这里描述这个方法适用条件 – 可选)
      *
@@ -33,7 +21,7 @@ public class CommonUtil {
      * @exception
      * @since 1.0.0
      */
-    public  void createFile(String name) {
+    public static  void createFile(String name) {
 
         if (android.os.Environment.MEDIA_MOUNTED.equals(android.os.Environment
                 .getExternalStorageState())) {
@@ -59,7 +47,7 @@ public class CommonUtil {
      * @param obj
      * @return
      */
-    public boolean isNull(Object obj){
+    public static boolean isNull(Object obj){
         if(obj==null||obj.equals("")){
             return true;
         }else{
@@ -71,7 +59,7 @@ public class CommonUtil {
      * @param packageName
      * @return
      */
-    public String getClassName(String packageName){
+    public static String getClassName(String packageName){
         String [] names = packageName.split("\\.");
         String name=names[names.length-1];
         return name;
