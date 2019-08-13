@@ -1,5 +1,6 @@
 package com.wusy.wusylibrary.base;
 
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.wusy.wusylibrary.util.LoadingViewUtil;
+
 import java.util.ArrayList;
 
 /**
@@ -21,7 +24,8 @@ public abstract class BaseFragment extends Fragment {
     public String TAG="";
     private IntentFilter intentFilter;
     private BroadcastReceiver broadcastReceiver;
-
+    private LoadingViewUtil loadingViewUtil;
+    private Dialog loadDialog;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -38,6 +42,8 @@ public abstract class BaseFragment extends Fragment {
     private void baseInit(){
         //为TAG赋值。值为类名
         TAG=getClassName(getActivity().getComponentName().getClassName());
+        loadingViewUtil=LoadingViewUtil.getInstance();
+        loadDialog=loadingViewUtil.createLoadingDialog(getContext(),"");
     }
     /**
      * Log打印info信息
@@ -90,24 +96,15 @@ public abstract class BaseFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         if(broadcastReceiver!=null)getActivity().unregisterReceiver(broadcastReceiver);
-        showLogInfo(getActivity().getComponentName().getClassName()+"----Fragment执行OnDestory");
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        showLogInfo(getActivity().getComponentName().getClassName()+"----Fragment执行onDestroyView");
+    public void showLoadImage(){
+        loadingViewUtil.showDialog(loadDialog);
     }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        showLogInfo(getActivity().getComponentName().getClassName()+"----Fragment执行onStop");
+    public void hideLoadImage(){
+        loadingViewUtil.dismissDialog(loadDialog);
     }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        showLogInfo(getActivity().getComponentName().getClassName()+"----Fragment执行onPause");
+    public void setLoadDialogMsg(String msg){
+        loadingViewUtil.setLoadMsg(loadDialog,msg);
     }
 }

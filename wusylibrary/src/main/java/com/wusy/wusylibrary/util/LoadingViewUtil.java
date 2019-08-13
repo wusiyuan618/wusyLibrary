@@ -93,7 +93,7 @@ public class LoadingViewUtil {
                 ((TextView)(dialog.getCurrentFocus().findViewById(R.id.tipTextView))).setText(msg);
             }
         }catch (Exception e){
-            e.printStackTrace();
+            Logger.e(e,"修改Dialog的提示信息时发生了错误");
         }
     }
 }

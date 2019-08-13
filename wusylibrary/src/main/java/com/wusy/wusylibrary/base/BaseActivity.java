@@ -186,6 +186,12 @@ public abstract class BaseActivity extends AppCompatActivity{
     }
 
     public void showLoadImage(){
-
+        loadingViewUtil.showDialog(loadDialog);
+    }
+    public void hideLoadImage(){
+        loadingViewUtil.dismissDialog(loadDialog);
+    }
+    public void setLoadDialogMsg(String msg){
+        loadingViewUtil.setLoadMsg(loadDialog,msg);
     }
 }
