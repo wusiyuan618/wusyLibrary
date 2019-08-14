@@ -317,6 +317,7 @@ public class CarouselView extends LinearLayout implements ViewPager.OnPageChange
         private String imgDescs;
 
         private String skipId;
+        private Object data;
 
         @Override
         public String toString() {
@@ -355,9 +356,16 @@ public class CarouselView extends LinearLayout implements ViewPager.OnPageChange
         public String getImgUrl() {
             return imgUrl;
         }
-
         public void setImgUrl(String imgUrl) {
             this.imgUrl = imgUrl;
+        }
+
+        public Object getData() {
+            return data;
+        }
+
+        public void setData(Object data) {
+            this.data = data;
         }
 
         public CarouselBean(int imgResource, String imgDescs) {
