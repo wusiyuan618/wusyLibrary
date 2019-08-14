@@ -280,7 +280,12 @@ public class CarouselView extends LinearLayout implements ViewPager.OnPageChange
             final int newPosition = position % imageViews.size(); //数组中总共有5张图片，超过数组长度时，取摸，防止下标越界
             ImageView imageView = imageViews.get(newPosition);
             //把图片添加到container中
-            container.addView(imageView);
+            try {
+                container.addView(imageView);
+            }catch (IllegalStateException e){
+                container.removeView(imageView);
+                container.addView(imageView);
+            }
             imageView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {

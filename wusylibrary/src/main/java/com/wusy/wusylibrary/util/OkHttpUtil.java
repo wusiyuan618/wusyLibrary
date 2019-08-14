@@ -71,9 +71,9 @@ public class OkHttpUtil {
     private void init() {
         //2018-5-9增加了超时限制 wusy
         HttpLoggingInterceptor loggingInterceptor=new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS);//设置日志显示级别
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);//设置日志显示级别
         mOkHttpClient = new OkHttpClient().newBuilder()
-                .connectTimeout(30000, TimeUnit.SECONDS)
+                .connectTimeout(20000, TimeUnit.SECONDS)
                 .addInterceptor(loggingInterceptor)
                 .build();
 
