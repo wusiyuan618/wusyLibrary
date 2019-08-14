@@ -21,6 +21,5 @@ public class ModuleViewHolder extends RecyclerView.ViewHolder {
         ll= (LinearLayout) itemView.findViewById(R.id.moduleview_item_ll);
         img= (ImageView) itemView.findViewById(R.id.moduleview_item_img);
         tv_title= (TextView) itemView.findViewById(R.id.moduleview_item_tv_top);
-        tv_content= (TextView) itemView.findViewById(R.id.moduleview_item_tv_bottom);
     }
 }

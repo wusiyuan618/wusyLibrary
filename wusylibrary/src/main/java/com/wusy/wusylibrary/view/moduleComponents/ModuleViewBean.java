@@ -22,10 +22,6 @@ public class ModuleViewBean implements Serializable {
      */
     private String title;
     /**
-     * 模块Item的内容2 多为详情内容
-     */
-    private String content;
-    /**
      * Item关联的详情展示Activity
      */
     private Class c;
@@ -33,7 +29,10 @@ public class ModuleViewBean implements Serializable {
      * 为每一个Item添加独特的点击事件
      */
     private ModuleViewAdapter.OnModuleViewItemClickListener onModuleViewItemClickListener;
-
+    /**
+     * 数据标识
+     */
+    private Object data;
     /**
      * 数据传参
      */
@@ -41,45 +40,39 @@ public class ModuleViewBean implements Serializable {
     public ModuleViewBean() {
     }
 
-    public ModuleViewBean(int imageResource, String title, String content,Class c ) {
+    public ModuleViewBean(int imageResource, String title,Class c ) {
         this.ImageResource = imageResource;
         this.title = title;
-        this.content = content;
         this.c=c;
     }
-    public ModuleViewBean(int imageResource, String title, String content,Class c,Bundle bundle ) {
+    public ModuleViewBean(int imageResource, String title,Class c,Bundle bundle ) {
         this.ImageResource = imageResource;
         this.title = title;
-        this.content = content;
         this.c=c;
         this.bundle=bundle;
     }
-    public ModuleViewBean(int imageResource, String title, String content, Class c,Bundle bundle,ModuleViewAdapter.OnModuleViewItemClickListener onModuleViewItemClickListener) {
+    public ModuleViewBean(int imageResource, String title, Class c,Bundle bundle,ModuleViewAdapter.OnModuleViewItemClickListener onModuleViewItemClickListener) {
         this.ImageResource = imageResource;
         this.title = title;
-        this.content = content;
         this.c=c;
         this.bundle=bundle;
         this.onModuleViewItemClickListener=onModuleViewItemClickListener;
     }
-    public ModuleViewBean(String imageUrl, String title, String content, Class c) {
+    public ModuleViewBean(String imageUrl, String title, Class c) {
         this.imageUrl = imageUrl;
         this.title = title;
-        this.content = content;
         this.c=c;
     }
-    public ModuleViewBean(String imageUrl, String title, String content, Class c,Bundle bundle,ModuleViewAdapter.OnModuleViewItemClickListener onModuleViewItemClickListener) {
+    public ModuleViewBean(String imageUrl, String title,  Class c,Bundle bundle,ModuleViewAdapter.OnModuleViewItemClickListener onModuleViewItemClickListener) {
         this.imageUrl = imageUrl;
         this.title = title;
-        this.content = content;
         this.c=c;
         this.bundle=bundle;
         this.onModuleViewItemClickListener=onModuleViewItemClickListener;
     }
-    public ModuleViewBean(String imageUrl, String title, String content, Class c,Bundle bundle) {
+    public ModuleViewBean(String imageUrl, String title, Class c,Bundle bundle) {
         this.imageUrl = imageUrl;
         this.title = title;
-        this.content = content;
         this.c=c;
         this.bundle=bundle;
     }
@@ -107,14 +100,6 @@ public class ModuleViewBean implements Serializable {
         this.title = title;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
     public Class getC() {
         return c;
     }
@@ -137,5 +122,13 @@ public class ModuleViewBean implements Serializable {
 
     public void setOnModuleViewItemClickListener(ModuleViewAdapter.OnModuleViewItemClickListener onModuleViewItemClickListener) {
         this.onModuleViewItemClickListener = onModuleViewItemClickListener;
+    }
+
+    public Object getIndex() {
+        return data;
+    }
+
+    public void setIndex(Object data) {
+        this.data = data;
     }
 }
