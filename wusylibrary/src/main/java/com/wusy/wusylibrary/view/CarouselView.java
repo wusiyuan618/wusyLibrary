@@ -216,7 +216,7 @@ public class CarouselView extends LinearLayout implements ViewPager.OnPageChange
             pointView.setEnabled(false); //默认都是暗色的
             ll_point.addView(pointView, layoutParams);
         }
-        if(imageViews.size()<=1)viewPager.setOffscreenPageLimit(0);
+        if(imageViews.size()<=3)viewPager.setOffscreenPageLimit(0);
         if(imageViews.size()>0) Logger.i("initView完成");
     }
 
@@ -280,12 +280,7 @@ public class CarouselView extends LinearLayout implements ViewPager.OnPageChange
             final int newPosition = position % imageViews.size(); //数组中总共有5张图片，超过数组长度时，取摸，防止下标越界
             ImageView imageView = imageViews.get(newPosition);
             //把图片添加到container中
-            try {
-                container.addView(imageView);
-            }catch (IllegalStateException e){
-                container.removeView(imageView);
-                container.addView(imageView);
-            }
+            container.addView(imageView);
             imageView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
