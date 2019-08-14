@@ -117,7 +117,7 @@ public class ModuleView extends LinearLayout {
         adapter=new ModuleViewAdapter(context);
         adapter.setList(list);
         if(list.size()==0)return this;
-        recyclerView.setLayoutManager(new FullyLinearLayoutManager(context));
+        recyclerView.setLayoutManager(new FullyGridLayoutManager(context,4));
         recyclerView.setAdapter(adapter);
         return this;
     }

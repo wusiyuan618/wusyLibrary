@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-        android:gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        xmlns:android="http://schemas.android.com/apk/res/android">
+    android:background="@drawable/border"
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout
         android:id="@+id/moduleview_item_ll"
-            android:background="@drawable/border"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:layout_height="95dp"
-            android:layout_width="95dp">
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_height="95dp"
+        android:layout_width="95dp">
 
         <ImageView
             android:id="@+id/moduleview_item_img"
+            android:layout_marginRight="5dp"
             android:layout_width="29dp"
             android:layout_height="25dp" />
         <TextView
-                android:id="@+id/moduleview_item_tv_top"
-                android:text=""
-                android:layout_marginTop="10dp"
-                android:textColor="#252525"
-                android:textSize="13sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+            android:id="@+id/moduleview_item_tv_top"
+            android:text=""
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:textColor="#252525"
+            android:textSize="13sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 </LinearLayout>
