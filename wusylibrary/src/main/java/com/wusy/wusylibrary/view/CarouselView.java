@@ -225,6 +225,7 @@ public class CarouselView extends LinearLayout implements ViewPager.OnPageChange
      */
     private  void startCarousel(){
         Log.i(TAG,"CarouselView轮播开启,isRunning="+isRunning);
+        if(imageViews.size()<=1) return;
         new Thread(){
             @Override
             public void run() {
