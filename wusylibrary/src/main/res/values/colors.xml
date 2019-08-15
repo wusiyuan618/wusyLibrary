@@ -17,7 +17,7 @@
     <!-- 附属内容的字体的颜色 -->
     <color name="subColor">#659aef</color>
     <color name="transparent">#00000000</color>
-
+    <color name="touming">#11000000</color>
     <!-- 纯色 -->
     <color name="blue">#2572ed</color>
     <color name="main_color">#9fb8ce</color>

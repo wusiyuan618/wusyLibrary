@@ -162,7 +162,11 @@ public abstract class BaseActivity extends AppCompatActivity{
         loadingViewUtil.setLoadMsg(loadDialog,msg);
     }
     public void navigateTo(Class toClass){
+       navigateTo(toClass,null);
+    }
+    public void navigateTo(Class toClass,Bundle bundle){
         Intent intent=new Intent(this,toClass);
+        if (bundle!=null) intent.putExtra("data",bundle);
         startActivity(intent);
     }
 }
