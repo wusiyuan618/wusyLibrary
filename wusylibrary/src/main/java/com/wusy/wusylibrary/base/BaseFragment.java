@@ -113,7 +113,7 @@ public abstract class BaseFragment extends Fragment {
     }
     public void navigateTo(Class toClass,Bundle bundle){
         Intent intent=new Intent(getActivity(),toClass);
-        if (bundle!=null) intent.putExtra("data",bundle);
+        if (bundle!=null) intent.putExtras(bundle);
         startActivity(intent);
     }
 }

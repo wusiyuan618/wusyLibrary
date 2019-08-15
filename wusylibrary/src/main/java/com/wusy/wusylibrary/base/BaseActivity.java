@@ -166,7 +166,7 @@ public abstract class BaseActivity extends AppCompatActivity{
     }
     public void navigateTo(Class toClass,Bundle bundle){
         Intent intent=new Intent(this,toClass);
-        if (bundle!=null) intent.putExtra("data",bundle);
+        if (bundle!=null) intent.putExtras(bundle);
         startActivity(intent);
     }
 }
