@@ -113,11 +113,13 @@ public class ModuleView extends LinearLayout {
      * @param list 内容数据 默认只会展示前面4条数据。其他数据在更多里展示。
      * @return ModuleView
      */
-    public ModuleView showRecycelerView(Context context, List<ModuleViewBean> list){
-        adapter=new ModuleViewAdapter(context);
+    public ModuleView showRecycelerView(Context context, List<ModuleViewBean> list,BaseRecyclerAdapter<ModuleViewBean> adapter,RecyclerView.LayoutManager layout){
+        if(adapter==null) adapter=new ModuleViewAdapter(context);
+        else adapter=adapter;
         adapter.setList(list);
         if(list.size()==0)return this;
-        recyclerView.setLayoutManager(new FullyGridLayoutManager(context,4));
+        if(layout==null) recyclerView.setLayoutManager(new FullyGridLayoutManager(context,4));
+        else recyclerView.setLayoutManager(layout);
         recyclerView.setAdapter(adapter);
         return this;
     }
