@@ -25,7 +25,6 @@ public class TitleView extends LinearLayout {
     private ImageView img_back,img_more;
     private Animation outAnimation,enterAnimation;
     private Context mC;
-    private onBackClickListener onBackClickListener;
     public TitleView(Context context) {
         this(context,null);
     }
@@ -71,16 +70,16 @@ public class TitleView extends LinearLayout {
      * @param activity 按钮关联的Activity
      * @return TitleView
      */
-    public TitleView showBackButton(boolean isShow, final Activity activity){
+    public TitleView showBackButton(boolean isShow, final Activity activity,OnClickListener onClickListener){
         if(isShow) {
             ll_backimg.setVisibility(VISIBLE);
-            ll_backimg.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(onBackClickListener!=null) onBackClickListener.onClickBack();
+            if(onClickListener==null){
+                ll_backimg.setOnClickListener(v -> {
                     activity.finish();
-                }
-            });
+                });
+            }else{
+                ll_backimg.setOnClickListener(onClickListener);
+            }
         }else{
             ll_backimg.setVisibility(INVISIBLE);
         }
@@ -214,16 +213,6 @@ public class TitleView extends LinearLayout {
     public void build(){
         ll_view.setVisibility(View.VISIBLE);
     }
-    interface onBackClickListener{
-        void onClickBack();
-    }
 
-    public TitleView.onBackClickListener getOnBackClickListener() {
-        return onBackClickListener;
-    }
-
-    public void setOnBackClickListener(TitleView.onBackClickListener onBackClickListener) {
-        this.onBackClickListener = onBackClickListener;
-    }
 }
 
