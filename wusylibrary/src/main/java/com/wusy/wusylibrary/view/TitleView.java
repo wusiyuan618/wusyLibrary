@@ -80,20 +80,15 @@ public class TitleView extends LinearLayout {
             }else{
                 ll_backimg.setOnClickListener(onClickListener);
             }
+
         }else{
             ll_backimg.setVisibility(INVISIBLE);
         }
         return this;
     }
 
-    public TitleView showBackButtonWithListener(boolean isShow,OnClickListener listener){
-        if(isShow) {
-            ll_backimg.setVisibility(VISIBLE);
-            ll_backimg.setOnClickListener(listener);
-        }else{
-            ll_backimg.setVisibility(INVISIBLE);
-        }
-        return this;
+    public TitleView showBackButton(boolean isShow,final Activity activity){
+        return showBackButton(isShow,activity,null);
     }
     /**
      * 是否显示更多按钮。并且为按钮绑定事件
