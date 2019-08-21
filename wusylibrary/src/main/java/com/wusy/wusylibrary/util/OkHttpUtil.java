@@ -143,10 +143,25 @@ public class OkHttpUtil {
         }
         Request request = new Request.Builder()
                 .url(url)
-                .addHeader("jid",token)
+                .addHeader("Authorization",token)
                 .post(formBody.build())
                 .build();
         deliveryResult(callback, request, activity);
+    }
+
+    /**
+     * Post直接提交JSON字符串
+     */
+    public void anysPost(String url,String token,String json,final ResultCallBack callback){
+        showLog("正在进行Post请求，url：" + url + "\n上传的值是：" + json);
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        RequestBody requestBody = RequestBody.create(JSON, json);
+        Request request = new Request.Builder()
+                .url(url)
+                .addHeader("Authorization",token)
+                .post(requestBody)
+                .build();
+        deliveryResult(callback, request, null);
     }
     public void asynPost(String url,String token, Map<String, String> maps,
                          final ResultCallBack callback) {
