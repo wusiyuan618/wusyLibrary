@@ -92,7 +92,9 @@ public class OkHttpUtil {
                         final ResultCallBack callback) {
         showLog("正在进行Get请求，url：" + url);
         Request.Builder builder = new Request.Builder()
-                .url(url);
+                .url(url)
+                .addHeader("Authorization","admin");
+
         if(headers!=null){
             for (String key : headers.keySet()) {
                 Log.i("wsy","key="+key+"\nvalue="+headers.get(key));
