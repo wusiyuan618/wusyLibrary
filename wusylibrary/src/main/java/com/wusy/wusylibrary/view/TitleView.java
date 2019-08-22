@@ -146,7 +146,7 @@ public class TitleView extends LinearLayout {
             tv_ok.setText(text);
             ll_ok.setVisibility(VISIBLE);
             ll_moreimg.setVisibility(GONE);
-            if (CommonUtil.isNull(listener)) ll_ok.setOnClickListener(listener);
+            if (!CommonUtil.isNull(listener)) ll_ok.setOnClickListener(listener);
         }else{
             ll_ok.setVisibility(GONE);
         }
