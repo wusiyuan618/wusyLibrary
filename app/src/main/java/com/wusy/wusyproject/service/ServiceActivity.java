@@ -14,7 +14,7 @@ public class ServiceActivity extends BaseActivity {
     private GuardBroadcastReceiver myBrodcast;
     @Override
     public int getContentViewId() {
-        return R.layout.activity_main;
+        return R.layout.activity_home;
     }
 
     @Override
