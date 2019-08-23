@@ -21,3 +21,16 @@ dependencies {
 	        implementation 'com.github.wusiyuan618:wusyLibrary:1.2.0'
 	}
 ```
+### 常见错误：
+`Error: Invoke-customs are only supported starting with Android O`
+解决方式--->在gradle.build中添加以下内容：
+```
+android{
+	......
+	compileOptions {
+		sourceCompatibility JavaVersion.VERSION_1_8
+    		targetCompatibility JavaVersion.VERSION_1_8
+	}
+	......
+}
+```
