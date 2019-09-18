@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 /**
  * Created by DalaR on 2017/11/27.
  * 解决RecyclerView的瀑布流布局嵌套进ScrollView不显示的问题
+ *  * 嵌套进RelateLayout里使用
  */
 
 public class FullyStaggeredGridLayoutManager extends StaggeredGridLayoutManager {
@@ -138,5 +139,8 @@ public class FullyStaggeredGridLayoutManager extends StaggeredGridLayoutManager 
         }
         return index;
     }
-
+    @Override
+    public boolean canScrollVertically() {
+        return false;
+    }
 }

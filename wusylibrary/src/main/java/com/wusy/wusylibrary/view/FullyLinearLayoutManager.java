@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 /**
  * Created by DalaR on 2017/11/27.
  * 解决RecyclerView的线性布局嵌套进ScrollView不显示的问题
+ * 嵌套进RelateLayout里使用
  */
 
 public class FullyLinearLayoutManager extends LinearLayoutManager {
@@ -101,5 +102,10 @@ public class FullyLinearLayoutManager extends LinearLayoutManager {
             e.printStackTrace();
         } finally {
         }
+    }
+
+    @Override
+    public boolean canScrollVertically() {
+        return false;
     }
 }

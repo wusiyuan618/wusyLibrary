@@ -8,7 +8,8 @@ import android.view.ViewGroup;
 
 /**
  * Created by DalaR on 2017/11/27.
- * 解决RecyclerView的网格布局嵌套进ScrollView不显示的问题
+ * 解决RecyclerView的网格布局嵌套进ScrollView不显示的问题.
+ *  * 嵌套进RelateLayout里使用
  */
 
 public class FullyGridLayoutManager extends GridLayoutManager {
@@ -93,5 +94,9 @@ public class FullyGridLayoutManager extends GridLayoutManager {
                 e.printStackTrace();
             }
         }
+    }
+    @Override
+    public boolean canScrollVertically() {
+        return false;
     }
 }
