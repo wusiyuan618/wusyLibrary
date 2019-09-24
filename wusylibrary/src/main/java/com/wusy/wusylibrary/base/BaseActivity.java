@@ -4,12 +4,15 @@ import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.orhanobut.logger.Logger;
@@ -43,12 +46,13 @@ import java.util.ArrayList;
  * 需要在子Activity的首层Viewgroup添加id---layout_total. 2018/5/23
  */
 
-public abstract class BaseActivity extends AppCompatActivity{
-    public String TAG="";
+public abstract class BaseActivity extends AppCompatActivity {
+    public String TAG = "";
     private IntentFilter intentFilter;
     private BroadcastReceiver broadcastReceiver;
     private LoadingViewUtil loadingViewUtil;
     private Dialog loadDialog;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,16 +60,17 @@ public abstract class BaseActivity extends AppCompatActivity{
         findView();
         init();
     }
-    private void baseInit(){
+
+    private void baseInit() {
         //         去掉标题栏
         getSupportActionBar().hide();
         setContentView(getContentViewId());
         //固定竖屏
 //        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        loadingViewUtil=LoadingViewUtil.getInstance();
-        loadDialog=loadingViewUtil.createLoadingDialog(this,"");
+        loadingViewUtil = LoadingViewUtil.getInstance();
+        loadDialog = loadingViewUtil.createLoadingDialog(this, "");
         //为TAG赋值。值为类名
-        TAG= CommonUtil.getClassName(getComponentName().getClassName());
+        TAG = CommonUtil.getClassName(getComponentName().getClassName());
         //将Activity添加进管理器中
         ActivityManager.getInstance().addActivity(this);
         //是否开启状态栏
@@ -74,60 +79,77 @@ public abstract class BaseActivity extends AppCompatActivity{
 
     }
 
-    private void isChangeStatusBar(boolean isChange){
-        if (isChange){
+    private void isChangeStatusBar(boolean isChange) {
+        if (isChange) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 StatusBarUtil.transparencyBar(this);
-                getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
                 try {
                     ViewGroup layout = findViewById(R.id.layout_total);
                     layout.setClipToPadding(true);
                     layout.setFitsSystemWindows(true);
                     layout.setBackgroundColor(getResources().getColor(R.color.titleViewBackgroundColor));
-                }catch (Exception e){
+                } catch (Exception e) {
                     Logger.e("该Activity没有为首层Layout添加id--layout_total，无法管理状态栏。");
                 }
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {// 4.4 ++
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            }
+
+            else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) { //5.0++
+                Window window = getWindow();
+                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.setStatusBarColor(Color.TRANSPARENT);
             }
         }
     }
 
     public abstract int getContentViewId();
+
     public abstract void findView();
+
     public abstract void init();
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Logger.d(getComponentName().getClassName()+"执行onDestroy");
+        Logger.d(getComponentName().getClassName() + "执行onDestroy");
         ActivityManager.getInstance().removeActivity(this);
-        if(broadcastReceiver!=null) unregisterReceiver(broadcastReceiver);
+        if (broadcastReceiver != null) unregisterReceiver(broadcastReceiver);
     }
 
     /**
      * Log打印info信息
+     *
      * @param info
      */
-    public void showLogInfo(String info){
+    public void showLogInfo(String info) {
         Logger.i(info);
     }
 
     /**
      * Log打印Eoor信息
+     *
      * @param error
      */
-    public void showLogError(String error){
+    public void showLogError(String error) {
         try {
             Logger.e(error);
-        }catch (Exception ignored){
+        } catch (Exception ignored) {
 
         }
     }
+
     /**
      * 打印Toast信息
      */
-    public void showToast(String toast){
-        Toast.makeText(this,toast,Toast.LENGTH_SHORT).show();
+    public void showToast(String toast) {
+        Toast.makeText(this, toast, Toast.LENGTH_SHORT).show();
     }
+
     /**
      * 重写的finish方法。为它添加了动画
      */
@@ -140,33 +162,38 @@ public abstract class BaseActivity extends AppCompatActivity{
     /**
      * 处理广播时，添加Action动作
      * 注册广播的时候一定记得在onDestory中销毁
+     *
      * @param actions
      */
-    public void addBroadcastAction(ArrayList<String> actions,BroadcastReceiver broadcastReceiver){
+    public void addBroadcastAction(ArrayList<String> actions, BroadcastReceiver broadcastReceiver) {
         //实例化广播需要的InntentFilter和MyBroadcastReceiver
-        this.broadcastReceiver=broadcastReceiver;
-        if(intentFilter==null) intentFilter=new IntentFilter();
-        for(int i=0;i<actions.size();i++){
+        this.broadcastReceiver = broadcastReceiver;
+        if (intentFilter == null) intentFilter = new IntentFilter();
+        for (int i = 0; i < actions.size(); i++) {
             intentFilter.addAction(actions.get(i));
         }
         registerReceiver(broadcastReceiver, intentFilter);
     }
 
-    public void showLoadImage(){
+    public void showLoadImage() {
         loadingViewUtil.showDialog(loadDialog);
     }
-    public void hideLoadImage(){
+
+    public void hideLoadImage() {
         loadingViewUtil.dismissDialog(loadDialog);
     }
-    public void setLoadDialogMsg(String msg){
-        loadingViewUtil.setLoadMsg(loadDialog,msg);
+
+    public void setLoadDialogMsg(String msg) {
+        loadingViewUtil.setLoadMsg(loadDialog, msg);
     }
-    public void navigateTo(Class toClass){
-       navigateTo(toClass,null);
+
+    public void navigateTo(Class toClass) {
+        navigateTo(toClass, null);
     }
-    public void navigateTo(Class toClass,Bundle bundle){
-        Intent intent=new Intent(this,toClass);
-        if (bundle!=null) intent.putExtras(bundle);
+
+    public void navigateTo(Class toClass, Bundle bundle) {
+        Intent intent = new Intent(this, toClass);
+        if (bundle != null) intent.putExtras(bundle);
         startActivity(intent);
     }
 }
