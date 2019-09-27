@@ -58,14 +58,14 @@ public class PwdIndicator extends LinearLayout {
             LayoutParams params_imageView = new LayoutParams(20, 20);
             params_imageView.leftMargin = 15;
             params_imageView.rightMargin=15;
-            imageView.setImageResource(R.mipmap.indicate_normal);
+            imageView.setImageResource(R.mipmap.icon_circle_normal);
             ll_view.addView(imageView, params_imageView);
             imageViews.add(imageView);
         }
     }
     public boolean add(){
         if(currentIndex!=count){
-            imageViews.get(currentIndex).setImageResource(R.mipmap.indicator_select);
+            imageViews.get(currentIndex).setImageResource(R.mipmap.icon_circle_selected);
             currentIndex++;
             return true;
         }else return false;
@@ -73,7 +73,7 @@ public class PwdIndicator extends LinearLayout {
     public boolean remove(){
         if(currentIndex!=0){
             currentIndex--;
-            imageViews.get(currentIndex).setImageResource(R.mipmap.indicate_normal);
+            imageViews.get(currentIndex).setImageResource(R.mipmap.icon_circle_normal);
             return true;
         }else return false;
     }
@@ -84,7 +84,7 @@ public class PwdIndicator extends LinearLayout {
     public void clear(){
         currentIndex=0;
         for (ImageView imageView:imageViews){
-            imageView.setImageResource(R.mipmap.indicate_normal);
+            imageView.setImageResource(R.mipmap.icon_circle_normal);
         }
     }
 }
