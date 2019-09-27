@@ -11,7 +11,6 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-
 import com.wusy.wusylibrary.R;
 
 import java.util.ArrayList;
@@ -25,9 +24,9 @@ public class NumberKeyBoxView extends View implements View.OnTouchListener {
     private int mRectWidth=150;//宫格按钮宽度
     private int mRectHeight=200;//宫格按钮高度
     private int mBaseInterval=1;//边框（间距）大小
-    private int mButtonColor= Color.parseColor("#4032C09D");//按钮颜色
+    private int mButtonColor= Color.parseColor("#292e33");//按钮颜色
     private int mFontColor= Color.parseColor("#FFFFFF");//字体颜色
-    private int mBorderColor= Color.parseColor("#32c09d");//边框颜色
+    private int mBorderColor= Color.parseColor("#2793ff");//边框颜色
     private List<Coordinate> coordinates;//宫格坐标集合，用于点击事件绑定
     private NumberKeyBoxViewClick numberKeyBoxViewClick;//对外提供点击接口
     public NumberKeyBoxView(Context context) {
@@ -149,6 +148,26 @@ public class NumberKeyBoxView extends View implements View.OnTouchListener {
         mPaint.setStrokeWidth(2);
         mPaint.setTextAlign(Paint.Align.CENTER);
 
+        for (Coordinate coordinate:coordinates){
+            //画按钮
+            mPaint.setColor(mButtonColor);
+            mPaint.setAlpha(51);
+            canvas.drawRect(coordinate.getLeft(), coordinate.getTop(),
+                    coordinate.getRight(), coordinate.getBottom(), mPaint);
+            mPaint.setAlpha(255);
+
+            //画内容
+            if(coordinate.getValue().equals("ok")){
+                canvas.drawBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.icon_conform),
+                        coordinate.getCenterX()-10,coordinate.getCenterY(),mPaint);
+            }else if(coordinate.getValue().equals("delete")){
+                canvas.drawBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.icon_delete),
+                        coordinate.getCenterX()-10,coordinate.getCenterY(),mPaint);
+            }else{
+                mPaint.setColor(mFontColor);
+                canvas.drawText(coordinate.getValue(),coordinate.centerX,coordinate.centerY, mPaint);
+            }
+        }
         //绘制边框
         mPaint.setColor(mBorderColor);
         mPaint.setStrokeWidth(mBaseInterval);
@@ -159,24 +178,6 @@ public class NumberKeyBoxView extends View implements View.OnTouchListener {
         for (int i=0;i<=row;i++){
             canvas.drawLine(0,i*(mRectHeight+mBaseInterval),
                     mRectWidth*column+column*mBaseInterval,i*(mRectHeight+mBaseInterval),mPaint);
-        }
-
-        for (Coordinate coordinate:coordinates){
-            //画按钮
-            mPaint.setColor(mButtonColor);
-            canvas.drawRect(coordinate.getLeft(), coordinate.getTop(),
-                    coordinate.getRight(), coordinate.getBottom(), mPaint);
-            //画内容
-            if(coordinate.getValue().equals("ok")){
-                canvas.drawBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.keyboxok),
-                        coordinate.getCenterX(),coordinate.getCenterY(),mPaint);
-            }else if(coordinate.getValue().equals("delete")){
-                canvas.drawBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.keyboxdelete),
-                        coordinate.getCenterX(),coordinate.getCenterY(),mPaint);
-            }else{
-                mPaint.setColor(mFontColor);
-                canvas.drawText(coordinate.getValue(),coordinate.centerX,coordinate.centerY, mPaint);
-            }
         }
     }
 
