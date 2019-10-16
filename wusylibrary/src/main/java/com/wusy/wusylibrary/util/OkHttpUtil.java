@@ -90,7 +90,20 @@ public class OkHttpUtil {
      */
     public void asynGet(String url, final Activity activity, HashMap<String,String> headers,
                         final ResultCallBack callback) {
-        asynGet(url,activity,headers,callback,"");
+        showLog("正在进行Get请求，url：" + url);
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        Request.Builder builder = new Request.Builder()
+                .url(url)
+                .addHeader("Authorization","admin");
+
+        if(headers!=null){
+            for (String key : headers.keySet()) {
+                Log.i("wsy","key="+key+"\nvalue="+headers.get(key));
+                builder=builder.addHeader(key,headers.get(key));
+            }
+        }
+        final Request request=builder.build();
+        deliveryResult(callback, request, activity);
     }
     public void asynGet(String url, final Activity activity, HashMap<String,String> headers,
                         final ResultCallBack callback,String json) {
