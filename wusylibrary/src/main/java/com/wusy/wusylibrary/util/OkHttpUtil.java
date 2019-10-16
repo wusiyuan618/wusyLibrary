@@ -90,9 +90,17 @@ public class OkHttpUtil {
      */
     public void asynGet(String url, final Activity activity, HashMap<String,String> headers,
                         final ResultCallBack callback) {
+        asynGet(url,activity,headers,callback,"");
+    }
+    public void asynGet(String url, final Activity activity, HashMap<String,String> headers,
+                        final ResultCallBack callback,String json) {
         showLog("正在进行Get请求，url：" + url);
+        if(!json.equals("")) showLog("作为body上传的json："+json);
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        RequestBody requestBody = RequestBody.create(JSON, json);
         Request.Builder builder = new Request.Builder()
                 .url(url)
+                .post(requestBody)
                 .addHeader("Authorization","admin");
 
         if(headers!=null){
@@ -103,22 +111,6 @@ public class OkHttpUtil {
         }
         final Request request=builder.build();
         deliveryResult(callback, request, activity);
-    }
-
-    public String syncGet(String url){
-        Request request = new Request.Builder()
-                .url(url)
-                .addHeader("token","")
-                .build();
-        Call call = mOkHttpClient.newCall(request);
-        String result = "";
-        try {
-            result = call.execute().body().string();
-            return result;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
     public void asynGet(String url, HashMap<String,String> headers,final ResultCallBack callback) {
         asynGet(url,null,headers,callback);
