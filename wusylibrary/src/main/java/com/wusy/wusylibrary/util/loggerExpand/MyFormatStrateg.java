@@ -89,7 +89,7 @@ public class MyFormatStrateg implements FormatStrategy {
     }
 
     public static final class Builder {
-        private static final int MAX_BYTES = 1024*1024; // 500K averages to a 4000 lines per file
+        private static final int MAX_BYTES = LoggerSetting.fileSize; // 500K averages to a 4000 lines per file
 
         Date date;
         SimpleDateFormat dateFormat;
@@ -132,8 +132,7 @@ public class MyFormatStrateg implements FormatStrategy {
                 dateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss.SSS", Locale.UK);
             }
             if (logStrategy == null) {
-                String diskPath = Environment.getExternalStorageDirectory().getAbsolutePath();
-                String folder = diskPath + File.separatorChar + "logger";
+                String folder =  LoggerSetting.saveDir;
                 HandlerThread ht = new HandlerThread("AndroidFileLogger." + folder);
                 ht.start();
                 Handler handler = new MyLogStrategy.WriteHandler(ht.getLooper(), folder, MAX_BYTES);
