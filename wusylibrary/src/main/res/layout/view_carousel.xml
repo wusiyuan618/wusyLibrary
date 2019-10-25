@@ -23,6 +23,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="15dp"
                 android:src="@mipmap/tz"
+                android:visibility="gone"
                 android:layout_width="13dp"
                 android:layout_height="12dp"/>
             <TextView
