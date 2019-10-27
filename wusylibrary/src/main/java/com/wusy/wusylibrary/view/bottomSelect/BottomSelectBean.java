@@ -29,6 +29,10 @@ public class BottomSelectBean implements Serializable {
      */
     private int normalIcon;
     /**
+     * 红点图片
+     */
+    private int redIcon;
+    /**
      * Item项的LinearLayout
      */
     private LinearLayout linearLayout;
@@ -49,6 +53,8 @@ public class BottomSelectBean implements Serializable {
      */
     private boolean isAdd=false;
     private BottomSelectView.BottomSelectViewClickListener listener;
+
+
 
     public boolean isSelect() {
         return isSelect;
@@ -128,5 +134,29 @@ public class BottomSelectBean implements Serializable {
 
     public void setAdd(boolean add) {
         isAdd = add;
+    }
+
+    public int getRedIcon() {
+        return redIcon;
+    }
+
+    public void setRedIcon(int redIcon) {
+        this.redIcon = redIcon;
+    }
+
+    @Override
+    public String toString() {
+        return "BottomSelectBean{" +
+                "isSelect=" + isSelect +
+                ", title='" + title + '\'' +
+                ", selectIcon=" + selectIcon +
+                ", normalIcon=" + normalIcon +
+                ", linearLayout=" + linearLayout +
+                ", textView=" + textView +
+                ", imageView=" + imageView +
+                ", fragment=" + fragment +
+                ", isAdd=" + isAdd +
+                ", listener=" + listener +
+                '}';
     }
 }

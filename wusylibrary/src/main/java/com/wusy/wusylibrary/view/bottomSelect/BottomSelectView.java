@@ -89,13 +89,11 @@ public class BottomSelectView extends LinearLayout {
             ImageView imageView = new ImageView(context);
             LayoutParams params_imageView = new LayoutParams(63, 63);
             params_imageView.topMargin = 18;
-            if (bean.getTitle()==null) {
+            if (bean.getTitle() == null) {
                 params_imageView = new LayoutParams(126, 126);
                 params_imageView.topMargin = 9;
-                params_imageView.bottomMargin=9;
+                params_imageView.bottomMargin = 9;
             }
-
-
 
             TextView textView = new TextView(context);
             textView.setTextSize(10);
@@ -111,7 +109,7 @@ public class BottomSelectView extends LinearLayout {
                 textView.setTextColor(getResources().getColor(R.color.normalColor));
             }
             inearLayout.addView(imageView, params_imageView);
-            if (bean.getTitle()!=null) {
+            if (bean.getTitle() != null) {
                 inearLayout.addView(textView, params_textView);
             }
 
@@ -119,7 +117,7 @@ public class BottomSelectView extends LinearLayout {
             inearLayout.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (bean.getTitle()!=null ) {
+                    if (bean.getTitle() != null) {
                         changeSelectItem(list, bean);
                         changeShowFragment(layout, list, bean, manager);
                     }
@@ -142,7 +140,7 @@ public class BottomSelectView extends LinearLayout {
      */
     private void changeSelectItem(List<BottomSelectBean> list, BottomSelectBean selectBean) {
         for (int i = 0; i < list.size(); i++) {
-            if (selectBean.getTitle()!=null ) {
+            if (selectBean.getTitle() != null) {
                 if (selectBean.getTitle().equals(list.get(i).getTitle())) {
                     list.get(i).setSelect(true);
                     list.get(i).getTextView().setTextColor(getResources().getColor(R.color.selectColor));
@@ -173,12 +171,8 @@ public class BottomSelectView extends LinearLayout {
                     if (list.get(i).isAdd()) {
                         if (list.get(i).getFragment() != null)
                             transaction.show(list.get(i).getFragment());
-//                            transaction.replace(R.la.activity_main_fra、gmentview)
                     } else {
-                        transaction.add(layout, list.get(i).getFragment());
-//                        transaction.replace(layout,list.get(i).getFragment());
-
-
+                        transaction.add(layout, list.get(i).getFragment(), "界面" + i);
                         list.get(i).setAdd(true);
                         if (list.get(i).getFragment() != null)
                             transaction.show(list.get(i).getFragment());
@@ -197,10 +191,6 @@ public class BottomSelectView extends LinearLayout {
     }
 
 
-    public void changeFregment(Fragment fragment){
-
-    }
-
     /**
      * 为各个Item添加Fragment的方法。
      *
@@ -209,10 +199,11 @@ public class BottomSelectView extends LinearLayout {
      * @param list
      */
     private void addFragmentForItem(int layout, FragmentManager manager, List<BottomSelectBean> list) {
+        Log.i("wsy", list.toString());
         FragmentTransaction transaction = manager.beginTransaction();
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).isSelect()) {
-                transaction.add(layout, list.get(i).getFragment());
+            if (list.get(i).isSelect() && !list.get(i).isAdd()) {
+                transaction.add(layout, list.get(i).getFragment(), "界面" + i);
                 list.get(i).setAdd(true);
                 transaction.commit();
                 return;
@@ -220,6 +211,22 @@ public class BottomSelectView extends LinearLayout {
         }
     }
 
+    public void showRedIcon(int position) {
+        if (list.get(position).getRedIcon() != 0) {
+            list.get(position).getImageView().setImageResource(list.get(position).getRedIcon());
+        }
+    }
+
+    public void addDefaultView(int position, FragmentManager manager,int layout) {
+        if (list.get(position).getFragment() != null) {
+            if (!list.get(position).isAdd()) {
+                FragmentTransaction ft = manager.beginTransaction();
+                ft.add(layout,list.get(position).getFragment(),"页面"+position);
+                ft.hide(list.get(position).getFragment());
+                ft.commit();
+            }
+        }
+    }
 
     /**
      * 对外提供的Item的点击事件实现接口
