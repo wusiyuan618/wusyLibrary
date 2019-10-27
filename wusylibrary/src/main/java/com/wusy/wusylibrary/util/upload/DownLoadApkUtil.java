@@ -21,19 +21,20 @@ import java.util.ArrayList;
  */
 
 public class DownLoadApkUtil {
-    public static String FILEDIR = Environment.getExternalStorageDirectory() + "/Wusy/";
-    public static final String DOWNLOAD_ACTION = "download_action";
-    public static String Custom_DOWNLOADAPK_URL = "";
-    private final String APPNAME = "hjl";
+    protected static String FILEDIR = Environment.getExternalStorageDirectory() + "/Wusy/";
+    protected static final String DOWNLOAD_ACTION = "download_action";
+    protected static String Custom_DOWNLOADAPK_URL = "";
+    private  String APPNAME = "hjl";
     private BaseActivity activity;
     private ProgressDialog m_pDialog;
 
     public DownLoadApkUtil(BaseActivity activity) {
         this.activity = activity;
     }
-    public DownLoadApkUtil(BaseActivity activity,String dir) {
+    public DownLoadApkUtil(BaseActivity activity,String dir,String appName) {
         this.activity = activity;
         this.FILEDIR=dir;
+        this.APPNAME=appName;
     }
     /**
      * 开始下载并更新

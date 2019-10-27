@@ -47,7 +47,7 @@ public class MyLogStrategy implements LogStrategy {
             String content = (String) msg.obj;
 
             FileWriter fileWriter = null;
-            File logFile = getLogFile(folder, "LogsByWusyLib");
+            File logFile = getLogFile(folder, LoggerSetting.fileName);
 
             try {
                 fileWriter = new FileWriter(logFile, true);
