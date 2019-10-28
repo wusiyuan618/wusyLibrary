@@ -29,9 +29,14 @@ public class BottomSelectBean implements Serializable {
      */
     private int normalIcon;
     /**
-     * 红点图片
+     * 红点图片选中状态
      */
-    private int redIcon;
+    private int redIconSelect;
+    /**
+     * 红点图片未选中状态
+     */
+    private int redIconNormal;
+
     /**
      * Item项的LinearLayout
      */
@@ -136,12 +141,20 @@ public class BottomSelectBean implements Serializable {
         isAdd = add;
     }
 
-    public int getRedIcon() {
-        return redIcon;
+    public int getRedIconSelect() {
+        return redIconSelect;
     }
 
-    public void setRedIcon(int redIcon) {
-        this.redIcon = redIcon;
+    public void setRedIconSelect(int redIconSelect) {
+        this.redIconSelect = redIconSelect;
+    }
+
+    public int getRedIconNormal() {
+        return redIconNormal;
+    }
+
+    public void setRedIconNormal(int redIconNormal) {
+        this.redIconNormal = redIconNormal;
     }
 
     @Override

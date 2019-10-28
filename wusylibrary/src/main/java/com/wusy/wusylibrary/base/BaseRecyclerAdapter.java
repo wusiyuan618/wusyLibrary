@@ -1,10 +1,16 @@
 package com.wusy.wusylibrary.base;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.wusy.wusylibrary.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +22,15 @@ import java.util.List;
 public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<T> list;
     private Context context;
+    private String tvEmptyStr="";
+    private int ivEmptyRes=0;
     private onRecyclerItemClickLitener onRecyclerItemClickLitener;
     public BaseRecyclerAdapter(Context context){
         this.context=context;
         list=new ArrayList<>();
     }
+    private static final int VIEW_TYPE_ITEM = 1;
+    private  static final int VIEW_TYPE_EMPTY = 0;
 
     public List<T> getList() {
         return list;
@@ -36,7 +46,13 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return onMyCreateViewHolder(parent,viewType);
+        if(viewType==VIEW_TYPE_EMPTY){
+            View emptyView=LayoutInflater.from(parent.getContext()).inflate(R.layout.view_recyclerview_empty, parent, false);
+
+            return new EmptyViewHolder(emptyView);
+        }else{
+            return onMyCreateViewHolder(parent,viewType);
+        }
     }
 
     public abstract RecyclerView.ViewHolder onMyCreateViewHolder(ViewGroup parent, int viewType);
@@ -58,6 +74,12 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
                 }
             });
         }
+        if(holder instanceof BaseRecyclerAdapter.EmptyViewHolder){
+            BaseRecyclerAdapter.EmptyViewHolder thisholder=(BaseRecyclerAdapter.EmptyViewHolder)holder;
+            if(ivEmptyRes!=0) thisholder.ivEmpty.setImageResource(ivEmptyRes);
+            if(!tvEmptyStr.equals(""))thisholder.tvEmpty.setText(tvEmptyStr);
+            return;
+        }
         onMyBindViewHolder(holder,position);
     }
 
@@ -65,9 +87,23 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
 
     @Override
     public int getItemCount() {
+        //如果mData.size()为0的话，只引入一个布局，就是emptyView
+        // 那么，这个recyclerView的itemCount为1
+        if (list.size() == 0) {
+            return 1;
+        }
+        //如果不为0，按正常的流程跑
         return list.size();
     }
-
+    @Override
+    public int getItemViewType(int position) {
+        //在这里进行判断，如果我们的集合的长度为0时，我们就使用emptyView的布局
+        if (list.size() == 0) {
+            return VIEW_TYPE_EMPTY;
+        }
+        //如果有数据，则使用ITEM的布局
+        return VIEW_TYPE_ITEM;
+    }
     /**
      *   指定位置添加item
      */
@@ -75,7 +111,12 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
         list.add(position, data);
         notifyItemInserted(position);
     }
-
+    public void setEmptyText(String str){
+        tvEmptyStr=str;
+    }
+    public void setEmptyImage(int res){
+        ivEmptyRes=res;
+    }
 
     /**
      * 指定位置移除item
@@ -137,6 +178,15 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
         public abstract void onLoadMore(int currentPage);
         public void clearPreviousTotal(){
             previousTotal=0;
+        }
+    }
+    class EmptyViewHolder extends RecyclerView.ViewHolder{
+        public TextView tvEmpty;
+        public ImageView ivEmpty;
+        public EmptyViewHolder(View itemView) {
+            super(itemView);
+            tvEmpty=itemView.findViewById(R.id.tv_empty);
+            ivEmpty=itemView.findViewById(R.id.iv_empty);
         }
     }
 }

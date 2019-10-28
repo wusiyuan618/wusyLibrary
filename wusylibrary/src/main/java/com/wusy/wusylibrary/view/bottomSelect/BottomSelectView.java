@@ -212,16 +212,22 @@ public class BottomSelectView extends LinearLayout {
     }
 
     public void showRedIcon(int position) {
-        if (list.get(position).getRedIcon() != 0) {
-            list.get(position).getImageView().setImageResource(list.get(position).getRedIcon());
+        if (list.get(position).isSelect()) {
+            if (list.get(position).getRedIconSelect() != 0) {
+                list.get(position).getImageView().setImageResource(list.get(position).getRedIconSelect());
+            } else {
+                if (list.get(position).getRedIconNormal() != 0) {
+                    list.get(position).getImageView().setImageResource(list.get(position).getRedIconNormal());
+                }
+            }
         }
     }
 
-    public void addDefaultView(int position, FragmentManager manager,int layout) {
+    public void addDefaultView(int position, FragmentManager manager, int layout) {
         if (list.get(position).getFragment() != null) {
             if (!list.get(position).isAdd()) {
                 FragmentTransaction ft = manager.beginTransaction();
-                ft.add(layout,list.get(position).getFragment());
+                ft.add(layout, list.get(position).getFragment());
                 list.get(position).setAdd(true);
                 ft.hide(list.get(position).getFragment());
                 ft.commit();
