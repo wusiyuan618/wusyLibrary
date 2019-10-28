@@ -222,6 +222,7 @@ public class BottomSelectView extends LinearLayout {
             if (!list.get(position).isAdd()) {
                 FragmentTransaction ft = manager.beginTransaction();
                 ft.add(layout,list.get(position).getFragment());
+                list.get(position).setAdd(true);
                 ft.hide(list.get(position).getFragment());
                 ft.commit();
             }
