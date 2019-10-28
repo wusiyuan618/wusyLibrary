@@ -3,7 +3,6 @@ package com.wusy.wusylibrary.util;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.ParseException;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
@@ -11,11 +10,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.widget.Toast;
-
-import com.google.gson.JsonParseException;
-import com.orhanobut.logger.Logger;
-
-import org.json.JSONException;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -355,9 +349,9 @@ public class OkHttpUtil {
     public void judeFileExists(File file) {
 
         if (file.exists()) {
-            Logger.i("file exists");
+            Log.i(LOGTAG,"file exists");
         } else {
-            Logger.i("file not exists, create it ...");
+            Log.i(LOGTAG,"file not exists, create it ...");
             try {
                 file.createNewFile();
             } catch (IOException e) {
@@ -374,12 +368,12 @@ public class OkHttpUtil {
 
         if (file.exists()) {
             if (file.isDirectory()) {
-                Logger.i("dir exists");
+                Log.i(LOGTAG,"dir exists");
             } else {
-                Logger.i("the same name file exists, can not create dir");
+                Log.i(LOGTAG,"the same name file exists, can not create dir");
             }
         } else {
-            Logger.i("dir not exists, create it ...");
+            Log.i(LOGTAG,"dir not exists, create it ...");
             file.mkdir();
         }
 
@@ -415,7 +409,7 @@ public class OkHttpUtil {
      * @param msg 需要打印的内容
      */
     private void showLog(String msg) {
-        Logger.i(msg);
+        Log.i(LOGTAG,msg);
     }
 
     /**
@@ -433,7 +427,7 @@ public class OkHttpUtil {
             @Override
             public void onFailure(final Call call, final IOException e) {
                 String message="";
-                Logger.e( "请求失败，错误信息：" + e.getLocalizedMessage());
+                Log.e( LOGTAG,"请求失败，错误信息：" + e.getLocalizedMessage());
                 if (e instanceof SocketTimeoutException) {
                     message = "网络连接超时";
                 } else if (e instanceof ConnectException) {
@@ -451,7 +445,7 @@ public class OkHttpUtil {
                         callback.failListener(call, e, finalMessage);
                     });
                 }else{
-                    Logger.e( "请求失败，错误信息：" + e.getLocalizedMessage());
+                    Log.e( LOGTAG,"请求失败，错误信息：" + e.getLocalizedMessage());
                     callback.failListener(call, e,message);
                 }
             }
