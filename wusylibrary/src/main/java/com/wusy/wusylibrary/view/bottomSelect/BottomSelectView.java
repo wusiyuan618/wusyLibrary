@@ -121,7 +121,7 @@ public class BottomSelectView extends LinearLayout {
                         changeSelectItem(list, bean);
                         changeShowFragment(layout, list, bean, manager);
                     }
-                    if (CommonUtil.isNull(bean.getListener())) {
+                    if (!CommonUtil.isNull(bean.getListener())) {
                         bean.getListener().clickListener();
                     }
                 }
