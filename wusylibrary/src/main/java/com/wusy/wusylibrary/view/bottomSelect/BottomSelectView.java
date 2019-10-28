@@ -172,7 +172,7 @@ public class BottomSelectView extends LinearLayout {
                         if (list.get(i).getFragment() != null)
                             transaction.show(list.get(i).getFragment());
                     } else {
-                        transaction.add(layout, list.get(i).getFragment(), "界面" + i);
+                        transaction.add(layout, list.get(i).getFragment());
                         list.get(i).setAdd(true);
                         if (list.get(i).getFragment() != null)
                             transaction.show(list.get(i).getFragment());
@@ -203,7 +203,7 @@ public class BottomSelectView extends LinearLayout {
         FragmentTransaction transaction = manager.beginTransaction();
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).isSelect() && !list.get(i).isAdd()) {
-                transaction.add(layout, list.get(i).getFragment(), "界面" + i);
+                transaction.add(layout, list.get(i).getFragment());
                 list.get(i).setAdd(true);
                 transaction.commit();
                 return;
@@ -221,7 +221,7 @@ public class BottomSelectView extends LinearLayout {
         if (list.get(position).getFragment() != null) {
             if (!list.get(position).isAdd()) {
                 FragmentTransaction ft = manager.beginTransaction();
-                ft.add(layout,list.get(position).getFragment(),"页面"+position);
+                ft.add(layout,list.get(position).getFragment());
                 ft.hide(list.get(position).getFragment());
                 ft.commit();
             }
