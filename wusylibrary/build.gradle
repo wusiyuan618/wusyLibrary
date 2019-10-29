@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 28
@@ -65,5 +67,9 @@ dependencies {
     implementation files('libs/mta-android-sdk-3.4.3.jar')
     implementation files('libs/slf4j-api-1.7.24.jar')
     implementation files('libs/track-sdk_v3.4.0.jar')
-    implementation files('libs/pinyin4j-2.5.0.jar')//汉子转拼音工具包
+    implementation files('libs/pinyin4j-2.5.0.jar')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version" //汉子转拼音工具包
+}
+repositories {
+    mavenCentral()
 }
