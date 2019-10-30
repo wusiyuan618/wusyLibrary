@@ -215,10 +215,11 @@ public class BottomSelectView extends LinearLayout {
         if (list.get(position).isSelect()) {
             if (list.get(position).getRedIconSelect() != 0) {
                 list.get(position).getImageView().setImageResource(list.get(position).getRedIconSelect());
-            } else {
-                if (list.get(position).getRedIconNormal() != 0) {
-                    list.get(position).getImageView().setImageResource(list.get(position).getRedIconNormal());
-                }
+            }
+        } else {
+            if (list.get(position).getRedIconNormal() != 0) {
+                list.get(position).getImageView().setImageResource(list.get(position).getRedIconNormal());
+
             }
         }
     }
