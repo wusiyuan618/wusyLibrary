@@ -4,18 +4,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-   <com.wusy.wusylibrary.view.TitleView
-       android:id="@+id/titleView"
+   <com.wusy.wusylibrary.view.CarouselView
+       android:id="@+id/carouselView"
        android:layout_width="match_parent"
-       android:layout_height="wrap_content"/>
-   <com.wusy.wusylibrary.view.moduleComponents.ModuleView
-       android:id="@+id/modelView"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"/>
-
-   <Button
-       android:id="@+id/submit"
-       android:text="提交"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content" />
+       android:layout_height="300dp"/>
 </LinearLayout>

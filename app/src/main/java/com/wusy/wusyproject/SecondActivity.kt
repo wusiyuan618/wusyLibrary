@@ -11,7 +11,7 @@ class SecondActivity : BaseActivity(){
     }
 
     override fun init() {
-       titleView.setTitle("111").showBackButton(true,this).build()
+//       titleView.setTitle("111").showBackButton(true,this).build()
     }
 
     override fun getContentViewId(): Int {
