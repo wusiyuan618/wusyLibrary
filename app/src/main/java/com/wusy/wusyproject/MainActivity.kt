@@ -12,6 +12,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun findView() {
+
     }
 
     override fun init() {
