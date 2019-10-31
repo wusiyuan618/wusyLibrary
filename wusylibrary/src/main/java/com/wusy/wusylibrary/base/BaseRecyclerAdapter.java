@@ -59,6 +59,12 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
+        if(holder instanceof BaseRecyclerAdapter.EmptyViewHolder){
+            BaseRecyclerAdapter.EmptyViewHolder thisholder=(BaseRecyclerAdapter.EmptyViewHolder)holder;
+            if(ivEmptyRes!=0) thisholder.ivEmpty.setImageResource(ivEmptyRes);
+            if(!tvEmptyStr.equals(""))thisholder.tvEmpty.setText(tvEmptyStr);
+            return;
+        }
         if(onRecyclerItemClickLitener!=null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -73,12 +79,6 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
                     return false;
                 }
             });
-        }
-        if(holder instanceof BaseRecyclerAdapter.EmptyViewHolder){
-            BaseRecyclerAdapter.EmptyViewHolder thisholder=(BaseRecyclerAdapter.EmptyViewHolder)holder;
-            if(ivEmptyRes!=0) thisholder.ivEmpty.setImageResource(ivEmptyRes);
-            if(!tvEmptyStr.equals(""))thisholder.tvEmpty.setText(tvEmptyStr);
-            return;
         }
         onMyBindViewHolder(holder,position);
     }
