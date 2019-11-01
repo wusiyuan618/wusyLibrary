@@ -19,7 +19,8 @@ class MainActivity : BaseActivity() {
         var list = ArrayList<CarouselView.CarouselBean>()
         list.add(CarouselView.CarouselBean(R.mipmap.ic_launcher))
         list.add(CarouselView.CarouselBean(R.mipmap.ic_launcher))
-
+        list.add(CarouselView.CarouselBean(R.mipmap.ic_launcher))
+        list.add(CarouselView.CarouselBean(R.mipmap.ic_launcher))
         carouselView.init(list, CarouselView.ANIM_LEFTLEAVE)
         carouselView.setIsRunningCarousel(false)
     }
