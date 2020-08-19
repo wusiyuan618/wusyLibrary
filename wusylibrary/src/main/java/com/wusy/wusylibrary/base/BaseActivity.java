@@ -56,6 +56,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        beforeSetContentView();
         baseInit();
         findView();
         init();
@@ -104,7 +105,9 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
         }
     }
+    public void beforeSetContentView(){
 
+    }
     public abstract int getContentViewId();
 
     public abstract void findView();
