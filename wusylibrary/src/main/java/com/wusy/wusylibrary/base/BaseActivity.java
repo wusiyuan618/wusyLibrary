@@ -52,7 +52,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private BroadcastReceiver broadcastReceiver;
     private LoadingViewUtil loadingViewUtil;
     private Dialog loadDialog;
-
+    private boolean isChangeStatusBar=true;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +75,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         //将Activity添加进管理器中
         ActivityManager.getInstance().addActivity(this);
         //是否开启状态栏
-        isChangeStatusBar(true);
+        isChangeStatusBar(isChangeStatusBar);
         //注册ButterKinef
 
     }
@@ -196,5 +196,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         Intent intent = new Intent(this, toClass);
         if (bundle != null) intent.putExtras(bundle);
         startActivity(intent);
+    }
+
+    public boolean isChangeStatusBar() {
+        return isChangeStatusBar;
+    }
+
+    public void setChangeStatusBar(boolean changeStatusBar) {
+        isChangeStatusBar = changeStatusBar;
     }
 }
