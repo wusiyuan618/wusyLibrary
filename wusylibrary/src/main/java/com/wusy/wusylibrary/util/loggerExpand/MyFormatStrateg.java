@@ -29,7 +29,7 @@ public class MyFormatStrateg implements FormatStrategy {
 
     private String tag=null;
 
-    private MyFormatStrateg(@NonNull MyFormatStrateg.Builder builder) {
+    private MyFormatStrateg(@NonNull Builder builder) {
         date = builder.date;
         dateFormat = builder.dateFormat;
         logStrategy = builder.logStrategy;
@@ -37,8 +37,8 @@ public class MyFormatStrateg implements FormatStrategy {
     }
 
     @NonNull
-    public static MyFormatStrateg.Builder newBuilder() {
-        return new MyFormatStrateg.Builder();
+    public static Builder newBuilder() {
+        return new Builder();
     }
 
     @Override
@@ -100,25 +100,25 @@ public class MyFormatStrateg implements FormatStrategy {
         }
 
         @NonNull
-        public MyFormatStrateg.Builder date(@Nullable Date val) {
+        public Builder date(@Nullable Date val) {
             date = val;
             return this;
         }
 
         @NonNull
-        public MyFormatStrateg.Builder dateFormat(@Nullable SimpleDateFormat val) {
+        public Builder dateFormat(@Nullable SimpleDateFormat val) {
             dateFormat = val;
             return this;
         }
 
         @NonNull
-        public MyFormatStrateg.Builder logStrategy(@Nullable LogStrategy val) {
+        public Builder logStrategy(@Nullable LogStrategy val) {
             logStrategy = val;
             return this;
         }
 
         @NonNull
-        public MyFormatStrateg.Builder tag(@Nullable String tag) {
+        public Builder tag(@Nullable String tag) {
             this.tag = tag;
             return this;
         }

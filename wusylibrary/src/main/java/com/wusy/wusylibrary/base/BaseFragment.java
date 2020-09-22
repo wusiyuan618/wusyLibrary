@@ -43,7 +43,7 @@ public abstract class BaseFragment extends Fragment {
     private void baseInit(){
         //为TAG赋值。值为类名
         TAG=getClassName(getActivity().getComponentName().getClassName());
-        loadingViewUtil=LoadingViewUtil.getInstance();
+        loadingViewUtil= LoadingViewUtil.getInstance();
         loadDialog=loadingViewUtil.createLoadingDialog(getContext(),"");
     }
     /**
@@ -115,5 +115,10 @@ public abstract class BaseFragment extends Fragment {
         Intent intent=new Intent(getActivity(),toClass);
         if (bundle!=null) intent.putExtras(bundle);
         startActivity(intent);
+    }
+    public void navigateTo(Class toClass, Bundle bundle,int resultCode) {
+        Intent intent = new Intent(getActivity(), toClass);
+        if (bundle != null) intent.putExtras(bundle);
+        startActivityForResult(intent,resultCode);
     }
 }

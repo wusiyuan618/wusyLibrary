@@ -7,7 +7,7 @@ import android.support.annotation.Nullable;
  */
 
 public abstract class BaseMVPActivity <V extends IBaseMVPView, T extends BaseMVPPresenter<V>>
-        extends BaseActivity{
+        extends BaseActivity {
     public T mPresenter;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

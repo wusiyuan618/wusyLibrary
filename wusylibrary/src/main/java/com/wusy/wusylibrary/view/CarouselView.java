@@ -27,15 +27,15 @@ import java.util.ArrayList;
  */
 
 public class CarouselView extends LinearLayout implements ViewPager.OnPageChangeListener {
-    public static final int ANIM_NORMAL = 0;
-    public static final int ANIM_ALPHA_PAGETRANS = 1;
-    public static final int ANIM_SCALEMAGIC = 2;
-    public static final int ANIM_ROTATEMAGIC = 3;
-    public static final int ANIM_LEFTLEAVE = 4;
-    public static final int ANIM_SCALERIGHTLEAVE = 5;
+    public static final int ANIM_NORMAL=0;
+    public static final int ANIM_ALPHA_PAGETRANS=1;
+    public static final int ANIM_SCALEMAGIC=2;
+    public static final int ANIM_ROTATEMAGIC=3;
+    public static final int ANIM_LEFTLEAVE=4;
+    public static final int ANIM_SCALERIGHTLEAVE=5;
     private FrameLayout frameLayout;
     private LinearLayout ll_bottomview;
-    private String TAG = "CarouselView";
+    private String TAG="CarouselView";
     private Context mC;
     private ViewPager viewPager;
     private LinearLayout ll_point;
@@ -44,123 +44,113 @@ public class CarouselView extends LinearLayout implements ViewPager.OnPageChange
     private ArrayList<CarouselBean> beans;
     private int lastPosition;
     private boolean isRunning = true;
-    private int intervalsTime = 5000;
+    private int intervalsTime=5000;
 
     private OnImageClickListener m_onImageClickListener;
 
-    private Handler handler = new Handler() {
+    private Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            switch (msg.what) {
+            switch (msg.what){
                 case 0:
-                    viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
+                    viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
                     break;
             }
         }
     };
-
     public CarouselView(Context context) {
-        this(context, null);
+        this(context,null);
     }
 
     public CarouselView(Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs, 0);
+        this(context, attrs,0);
     }
 
     public CarouselView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         LayoutInflater.from(context).inflate(R.layout.view_carousel, this);
-        this.mC = context;
+        this.mC=context;
         findView();
     }
-
-    private void findView() {
-        viewPager = findViewById(R.id.view_carousel_viewpager);
-        tv_desc = findViewById(R.id.view_carousel_tv_desc);
-        ll_point = findViewById(R.id.view_carousel_ll_point);
-        frameLayout = findViewById(R.id.view_carousel_framelayout);
-        ll_bottomview = findViewById(R.id.view_carousel_ll_bottomview);
+    private void findView(){
+        viewPager=findViewById(R.id.view_carousel_viewpager);
+        tv_desc=findViewById(R.id.view_carousel_tv_desc);
+        ll_point=findViewById(R.id.view_carousel_ll_point);
+        frameLayout=findViewById(R.id.view_carousel_framelayout);
+        ll_bottomview=findViewById(R.id.view_carousel_ll_bottomview);
     }
 
-    public void init(ArrayList<CarouselBean> beans, int anim) {
-        this.beans = beans;
+    public void init(ArrayList<CarouselBean> beans,int anim){
+        this.beans=beans;
         initView();
         initAnim(anim);
         initAdapter();
         startCarousel();
     }
-
-    public void init(ArrayList<CarouselBean> beans) {
-        init(beans, ANIM_NORMAL);
+    public void init(ArrayList<CarouselBean> beans){
+        init(beans,ANIM_NORMAL);
     }
-
     /**
      * 是否开启轮播，默认不开启
-     *
      * @param isRunning
      */
-    public void setIsRunningCarousel(boolean isRunning) {
-        this.isRunning = isRunning;
+    public void setIsRunningCarousel(boolean isRunning){
+        this.isRunning=isRunning;
     }
 
     /**
      * 轮播间隔时间，默认为5000毫秒
-     *
      * @param intervalsTime
      */
-    public void setIntervalsTime(int intervalsTime) {
-        this.intervalsTime = intervalsTime;
+    public void setIntervalsTime(int intervalsTime){
+        this.intervalsTime=intervalsTime;
     }
 
     /**
      * 设置底部描述布局的背景颜色。推荐#6000
-     *
      * @param colorResource
      */
-    public void setBottomViewBackGroundColor(int colorResource) {
+    public void setBottomViewBackGroundColor(int colorResource){
         ll_bottomview.setBackgroundColor(colorResource);
     }
 
     /**
      * 设置是否显示指示器，默认显示
-     *
      * @param visible
      */
-    public void setPointVisible(boolean visible) {
+    public void setPointVisible(boolean visible){
         if (visible) ll_point.setVisibility(VISIBLE);
         else ll_point.setVisibility(GONE);
     }
 
     /**
      * 设置是否显示文字描述。默认不显示
-     *
      * @param visible
      */
-    public void setDescVisible(boolean visible) {
+    public void setDescVisible(boolean visible){
         if (visible) tv_desc.setVisibility(VISIBLE);
         else tv_desc.setVisibility(GONE);
     }
-
     private void initAnim(int anim) {
-        switch (anim) {
+        switch (anim){
             case ANIM_ALPHA_PAGETRANS:
                 excisionPage();
-                viewPager.setPageTransformer(true, new AlphaPageTransformer());
+                viewPager.setPageTransformer(true,new AlphaPageTransformer());
                 break;
             case ANIM_SCALEMAGIC:
                 excisionPage();
-                viewPager.setPageTransformer(true, new ScaleMagic());
+                viewPager.setPageTransformer(true,new ScaleMagic());
                 break;
             case ANIM_ROTATEMAGIC:
                 excisionPage();
-                viewPager.setPageTransformer(true, new RotateMagic());
+                viewPager.setPageTransformer(true,new RotateMagic());
                 break;
             case ANIM_LEFTLEAVE:
-                viewPager.setPageTransformer(true, new LeftLeave());
+                viewPager.setPageTransformer(true,new LeftLeave());
                 break;
             case ANIM_SCALERIGHTLEAVE:
-                viewPager.setPageTransformer(true, new ScaleRightLeave());
+                viewPager.setPageTransformer(true,new ScaleRightLeave());
                 break;
             case ANIM_NORMAL:
             default:
@@ -173,46 +163,45 @@ public class CarouselView extends LinearLayout implements ViewPager.OnPageChange
     /**
      * 当需要ViewPager一个界面显示多个Item的时候，调用改方法。
      */
-    private void excisionPage() {
-        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
-        lp.setMargins(120, 40, 120, 40);
+    private void excisionPage(){
+        FrameLayout.LayoutParams lp=new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+        lp.setMargins(120,40,120,40);
         viewPager.setLayoutParams(lp);
         viewPager.setClipChildren(false);
         frameLayout.setClipChildren(false);
         //设置Page间间距
         viewPager.setPageMargin(20);
         //设置缓存的页面数量
-        if (beans.size() > 5) viewPager.setOffscreenPageLimit(2);
+        if(beans.size()>5)viewPager.setOffscreenPageLimit(2);
     }
-
     /**
      * 初始化适配器
      */
     private void initAdapter() {
         ll_point.getChildAt(0).setEnabled(true);//初始化控件时，设置第一个小圆点为亮色
         tv_desc.setText(beans.get(0).getImgDescs()); //设置第一个图片对应的文字
-        lastPosition = 0;
+        lastPosition=0;
         viewPager.setAdapter(new CarouseAdapter());
     }
 
     /**
      * 初始化控件
      */
-    private void initView() {
+    private void initView(){
         viewPager.setOnPageChangeListener(this);
-        imageViews = new ArrayList<>();
+        imageViews=new ArrayList<>();
         ImageView imageView;
         View pointView;
-        for (int i = 0; i < beans.size(); i++) {
+        for (int i = 0; i < beans.size(); i++){
             //添加图片到集合中
             imageView = new ImageView(mC);
-            if (beans.get(i).getImgResource() != 0) {
+            if(beans.get(i).getImgResource()!=0){
                 imageView.setBackgroundResource(beans.get(i).getImgResource());
             }
-            if (beans.get(i).getImgUrl() != null && !beans.get(i).getImgUrl().equals("")) {
+            if(beans.get(i).getImgUrl()!=null&&!beans.get(i).getImgUrl().equals("")){
                 ImageLoaderUtil instance = ImageLoaderUtil.getInstance(mC);
                 instance.setDefaultImg(R.mipmap.default_publicimg);
-                instance.loadingImage(beans.get(i).getImgUrl(), imageView);
+                instance.loadingImage(beans.get(i).getImgUrl(),imageView);
             }
             imageViews.add(imageView);
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);//设置图片铺满xy轴，解决图片宽高小了导致样式丑陋的问题
@@ -220,27 +209,27 @@ public class CarouselView extends LinearLayout implements ViewPager.OnPageChange
             pointView = new View(mC);
             pointView.setBackgroundResource(R.drawable.carousel_point); //使用选择器设置背景
             LayoutParams layoutParams = new LayoutParams(16, 16);
-            if (i != 0) {
+            if (i != 0){
                 //如果不是第一个点，则设置点的左边距
                 layoutParams.leftMargin = 10;
             }
             pointView.setEnabled(false); //默认都是暗色的
             ll_point.addView(pointView, layoutParams);
         }
-        if (imageViews.size() <= 3) viewPager.setOffscreenPageLimit(0);
-        if (imageViews.size() > 0) Logger.i("initView完成");
+        if(imageViews.size()<=3)viewPager.setOffscreenPageLimit(0);
+        if(imageViews.size()>0) Logger.i("initView完成");
     }
 
     /**
      * 开启轮播
      */
-    private void startCarousel() {
-        Log.i(TAG, "CarouselView轮播开启,isRunning=" + isRunning);
-        if (imageViews.size() <= 1) return;
-        new Thread() {
+    private  void startCarousel(){
+        Log.i(TAG,"CarouselView轮播开启,isRunning="+isRunning);
+        if(imageViews.size()<=1) return;
+        new Thread(){
             @Override
             public void run() {
-                while (isRunning) {
+                while(isRunning){
                     try {
                         Thread.sleep(intervalsTime);
                         handler.sendEmptyMessage(0);
@@ -251,34 +240,29 @@ public class CarouselView extends LinearLayout implements ViewPager.OnPageChange
             }
         }.start();
     }
-
     //页面滑动
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
     }
-
     //新的页面被选中
     @Override
     public void onPageSelected(int position) {
         //当前的位置可能很大，为了防止下标越界，对要显示的图片的总数进行取余
         int newPosition = position % beans.size();
         //设置描述信息
-        if (beans.get(newPosition).getImgDescs() != null)
-            tv_desc.setText(beans.get(newPosition).getImgDescs());
+        if (beans.get(newPosition).getImgDescs()!=null)tv_desc.setText(beans.get(newPosition).getImgDescs());
         else tv_desc.setText("");
         //设置小圆点为高亮或暗色
         ll_point.getChildAt(lastPosition).setEnabled(false);
         ll_point.getChildAt(newPosition).setEnabled(true);
         lastPosition = newPosition; //记录之前的点
     }
-
     //页面滑动状态发生改变
     @Override
     public void onPageScrollStateChanged(int state) {
 
     }
-
     private class CarouseAdapter extends PagerAdapter {
 
         @Override
@@ -288,7 +272,7 @@ public class CarouselView extends LinearLayout implements ViewPager.OnPageChange
 
         @Override
         public boolean isViewFromObject(View view, Object object) {
-            return view == object;
+            return view==object;
         }
 
         @Override
@@ -297,44 +281,37 @@ public class CarouselView extends LinearLayout implements ViewPager.OnPageChange
             final int newPosition = position % imageViews.size(); //数组中总共有5张图片，超过数组长度时，取摸，防止下标越界
             ImageView imageView = imageViews.get(newPosition);
             //把图片添加到container中
-            try {
-                container.addView(imageView);
-            } catch (IllegalStateException e) {
-                container.removeView(imageView);
-                container.addView(imageView);
+            ViewGroup parent = (ViewGroup) imageView.getParent();
+            if (parent!=null){
+                parent.removeView(imageView);
             }
-            imageView.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (m_onImageClickListener != null)
-                        m_onImageClickListener.onClick(beans.get(newPosition));
-                }
+            container.addView(imageView);
+            imageView.setOnClickListener(v -> {
+                if(m_onImageClickListener!=null) m_onImageClickListener.onClick(beans.get(newPosition));
             });
-
             //把图片返回给框架，用来缓存
             return imageView;
         }
-
         //销毁条目
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
             //object:刚才创建的对象，即要销毁的对象
-            container.removeView((View) object);
+//            container.removeView((View) object);
         }
 
     }
 
-    public interface OnImageClickListener {
+    public interface OnImageClickListener{
         void onClick(CarouselBean bean);
     }
 
-    public void setOnImageClickListener(OnImageClickListener listener) {
-        this.m_onImageClickListener = listener;
+    public void setOnImageClickListener(OnImageClickListener listener){
+        this.m_onImageClickListener=listener;
 
     }
 
 
-    public static class CarouselBean {
+    public static class CarouselBean{
 
         private int imgResource;
         private String imgUrl;
@@ -380,7 +357,6 @@ public class CarouselView extends LinearLayout implements ViewPager.OnPageChange
         public String getImgUrl() {
             return imgUrl;
         }
-
         public void setImgUrl(String imgUrl) {
             this.imgUrl = imgUrl;
         }
@@ -398,56 +374,51 @@ public class CarouselView extends LinearLayout implements ViewPager.OnPageChange
             this.imgDescs = imgDescs;
         }
 
-        public CarouselBean() {
+        public CarouselBean(){
 
         }
-
         public CarouselBean(int imgResource) {
             this.imgResource = imgResource;
         }
 
-        public CarouselBean(String imgUrl, String imgDescs) {
-            this.imgUrl = imgUrl;
-            this.imgDescs = imgDescs;
+        public CarouselBean(String imgUrl,String imgDescs){
+            this.imgUrl=imgUrl;
+            this.imgDescs=imgDescs;
         }
-
-        public CarouselBean(String imgUrl) {
-            this.imgUrl = imgUrl;
+        public CarouselBean(String imgUrl){
+            this.imgUrl=imgUrl;
         }
     }
 
     /**
      * 单纯渐变动画
      */
-    private class AlphaPageTransformer implements ViewPager.PageTransformer {
+    private class AlphaPageTransformer implements ViewPager.PageTransformer{
         private float mMinAlpha = 0.5f;
-
         @Override
         public void transformPage(View view, float position) {
             float factor;
             if (position < -1) {
                 view.setAlpha(mMinAlpha);
             } else if (position <= 1) { // [-1,1]
-                if (position <= 0) { //[-1，0)
+                if (position <= 0){ //[-1，0)
                     factor = mMinAlpha + (1 - mMinAlpha) * (1 + position);
                     view.setAlpha(factor);
-                } else {//[0，1]
+                } else{//[0，1]
                     factor = mMinAlpha + (1 - mMinAlpha) * (1 - position);
                     view.setAlpha(factor);
                 }
-            } else { // (1,+Infinity]
+            }else { // (1,+Infinity]
                 view.setAlpha(mMinAlpha);
             }
         }
     }
-
     /**
      * 渐变+缩放动画
      */
     private class ScaleMagic implements ViewPager.PageTransformer {
         private static final float MIN_SCALE = 0.90f;
         private static final float MIN_ALPHA = 0.5f;
-
         @Override
         public void transformPage(View page, float position) {
             if (position < -1 || position > 1) {
@@ -476,7 +447,6 @@ public class CarouselView extends LinearLayout implements ViewPager.OnPageChange
     private class RotateMagic implements ViewPager.PageTransformer {
         private float mMaxRotate = 15.0f;
         private float MIN_ALPHA = 0.7f;
-
         @Override
         public void transformPage(View view, float position) {
             if (position < -1) { // [-Infinity,-1)
@@ -484,11 +454,11 @@ public class CarouselView extends LinearLayout implements ViewPager.OnPageChange
                 view.setPivotX(view.getWidth());
                 view.setPivotY(view.getHeight());
             } else if (position <= 1) { // [-1,1]
-                if (position <= 0) { //[0，-1]
+                if (position <= 0){ //[0，-1]
                     view.setPivotX(view.getWidth() * (0.5f + 0.5f * (-position)));
                     view.setPivotY(view.getHeight());
                     view.setRotation(mMaxRotate * position);
-                } else {//[1,0]
+                } else{//[1,0]
                     view.setPivotX(view.getWidth() * 0.5f * (1 - position));
                     view.setPivotY(view.getHeight());
                     view.setRotation(mMaxRotate * position);
@@ -502,13 +472,11 @@ public class CarouselView extends LinearLayout implements ViewPager.OnPageChange
             }
         }
     }
-
     /**
      * 左边离开
      */
     private class LeftLeave implements ViewPager.PageTransformer {
         private final float MIN_SCALE = 0.75f;
-
         @Override
         public void transformPage(View view, float position) {
             int pageWidth = view.getWidth();
@@ -544,14 +512,12 @@ public class CarouselView extends LinearLayout implements ViewPager.OnPageChange
         }
 
     }
-
     /**
      * 缩小右边离开
      */
     private class ScaleRightLeave implements ViewPager.PageTransformer {
         private static final float MIN_SCALE = 0.85f;
         private static final float MIN_ALPHA = 0.5f;
-
         @Override
         public void transformPage(View view, float position) {
             int pageWidth = view.getWidth();

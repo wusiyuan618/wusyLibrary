@@ -3,17 +3,13 @@ package com.wusy.wusylibrary.view.moduleComponents;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.wusy.wusylibrary.R;
 import com.wusy.wusylibrary.base.BaseRecyclerAdapter;
 import com.wusy.wusylibrary.util.ImageLoaderUtil;
-
-import java.io.File;
 
 /**
  * Created by DalaR on 2017/11/27.

@@ -9,11 +9,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
 import com.wusy.wusylibrary.R;
 import com.wusy.wusylibrary.base.BaseRecyclerAdapter;
 import com.wusy.wusylibrary.view.FullyGridLayoutManager;
-import com.wusy.wusylibrary.view.FullyLinearLayoutManager;
 
 import java.util.List;
 
@@ -59,7 +57,7 @@ public class ModuleView extends LinearLayout {
      * @param titleColor 字体颜色
      * @return ModuleView
      */
-    public ModuleView setTitle(String title,int titleColor){
+    public ModuleView setTitle(String title, int titleColor){
         tv_title.setText(title);
         if(titleColor!=0){
             tv_title.setTextColor(titleColor);
@@ -73,7 +71,7 @@ public class ModuleView extends LinearLayout {
      * @param listener 按钮的点击事件
      * @return ModuleView
      */
-    public ModuleView showRightImg(boolean isShow,OnClickListener listener){
+    public ModuleView showRightImg(boolean isShow, OnClickListener listener){
         if(isShow){
             ll_right.setVisibility(View.VISIBLE);
             if(listener!=null){
@@ -90,7 +88,7 @@ public class ModuleView extends LinearLayout {
      * @param imgResource 自定义按钮的图标
      * @return ModuleView
      */
-    public ModuleView showRightImg(boolean isShow,OnClickListener listener,int imgResource){
+    public ModuleView showRightImg(boolean isShow, OnClickListener listener, int imgResource){
         showRightImg(isShow,listener);
         img_right.setImageResource(imgResource);
         return this;
@@ -113,12 +111,12 @@ public class ModuleView extends LinearLayout {
      * @param list 内容数据 默认只会展示前面4条数据。其他数据在更多里展示。
      * @return ModuleView
      */
-    public ModuleView showRecycelerView(Context context, List<ModuleViewBean> list,BaseRecyclerAdapter<ModuleViewBean> adapter,RecyclerView.LayoutManager layout){
+    public ModuleView showRecycelerView(Context context, List<ModuleViewBean> list, BaseRecyclerAdapter<ModuleViewBean> adapter, RecyclerView.LayoutManager layout){
         if(adapter==null) adapter=new ModuleViewAdapter(context);
         else adapter=adapter;
         adapter.setList(list);
         if(list.size()==0)return this;
-        if(layout==null) recyclerView.setLayoutManager(new FullyGridLayoutManager(context,4));
+        if(layout==null) recyclerView.setLayoutManager(new FullyGridLayoutManager(context,3));
         else recyclerView.setLayoutManager(layout);
         recyclerView.setAdapter(adapter);
         return this;

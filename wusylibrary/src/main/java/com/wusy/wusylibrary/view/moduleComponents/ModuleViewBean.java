@@ -51,7 +51,7 @@ public class ModuleViewBean implements Serializable {
         this.c=c;
         this.bundle=bundle;
     }
-    public ModuleViewBean(int imageResource, String title, Class c,Bundle bundle,ModuleViewAdapter.OnModuleViewItemClickListener onModuleViewItemClickListener) {
+    public ModuleViewBean(int imageResource, String title, Class c, Bundle bundle, ModuleViewAdapter.OnModuleViewItemClickListener onModuleViewItemClickListener) {
         this.ImageResource = imageResource;
         this.title = title;
         this.c=c;
@@ -63,7 +63,7 @@ public class ModuleViewBean implements Serializable {
         this.title = title;
         this.c=c;
     }
-    public ModuleViewBean(String imageUrl, String title,  Class c,Bundle bundle,ModuleViewAdapter.OnModuleViewItemClickListener onModuleViewItemClickListener) {
+    public ModuleViewBean(String imageUrl, String title, Class c, Bundle bundle, ModuleViewAdapter.OnModuleViewItemClickListener onModuleViewItemClickListener) {
         this.imageUrl = imageUrl;
         this.title = title;
         this.c=c;

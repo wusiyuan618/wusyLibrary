@@ -1,7 +1,6 @@
 package com.wusy.wusylibrary.base;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,8 +21,9 @@ import java.util.List;
 public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<T> list;
     private Context context;
-    private String tvEmptyStr="";
+    private String tvEmptyStr="未查询到列表信息";
     private int ivEmptyRes=0;
+    private boolean isShowEmptyView=true;
     private onRecyclerItemClickLitener onRecyclerItemClickLitener;
     public BaseRecyclerAdapter(Context context){
         this.context=context;
@@ -46,9 +46,8 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if(viewType==VIEW_TYPE_EMPTY){
+        if(viewType==VIEW_TYPE_EMPTY&&isShowEmptyView){
             View emptyView=LayoutInflater.from(parent.getContext()).inflate(R.layout.view_recyclerview_empty, parent, false);
-
             return new EmptyViewHolder(emptyView);
         }else{
             return onMyCreateViewHolder(parent,viewType);
@@ -62,7 +61,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
         if(holder instanceof BaseRecyclerAdapter.EmptyViewHolder){
             BaseRecyclerAdapter.EmptyViewHolder thisholder=(BaseRecyclerAdapter.EmptyViewHolder)holder;
             if(ivEmptyRes!=0) thisholder.ivEmpty.setImageResource(ivEmptyRes);
-            if(!tvEmptyStr.equals(""))thisholder.tvEmpty.setText(tvEmptyStr);
+            thisholder.tvEmpty.setText(tvEmptyStr);
             return;
         }
         if(onRecyclerItemClickLitener!=null) {
@@ -84,12 +83,11 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
     }
 
     public abstract void onMyBindViewHolder(RecyclerView.ViewHolder holder, int position);
-
     @Override
     public int getItemCount() {
         //如果mData.size()为0的话，只引入一个布局，就是emptyView
         // 那么，这个recyclerView的itemCount为1
-        if (list.size() == 0) {
+        if (list.size() == 0&&isShowEmptyView) {
             return 1;
         }
         //如果不为0，按正常的流程跑
@@ -128,11 +126,14 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
 
     public interface onRecyclerItemClickLitener {
         void onRecyclerItemClick(RecyclerView.ViewHolder view, int position);
-        void onRecyclerItemLongClick(RecyclerView.ViewHolder view , int position);
+        void onRecyclerItemLongClick(RecyclerView.ViewHolder view, int position);
     }
     public void setOnRecyclerItemClickLitener(onRecyclerItemClickLitener onRecyclerItemClickLitener)
     {
         this.onRecyclerItemClickLitener = onRecyclerItemClickLitener;
+    }
+    public void setShowEmptyView(boolean isShowEmptyView){
+        this.isShowEmptyView=isShowEmptyView;
     }
 
     /**

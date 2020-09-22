@@ -17,6 +17,7 @@ import com.wusy.wusylibrary.R;
 
 public class LoadingViewUtil {
     private static LoadingViewUtil loadingViewUtil;
+    private TextView tipTextView;
     private LoadingViewUtil(){
 
     }
@@ -36,7 +37,7 @@ public class LoadingViewUtil {
         View v = inflater.inflate(R.layout.dialog_loading, null);// 得到加载view
         LinearLayout layout = (LinearLayout) v
                 .findViewById(R.id.dialog_loading_view);// 加载布局
-        TextView tipTextView = (TextView) v.findViewById(R.id.tipTextView);// 提示文字
+        tipTextView = (TextView) v.findViewById(R.id.tipTextView);// 提示文字
         tipTextView.setText(msg);// 设置加载信息
 
         Dialog loadingDialog = new Dialog(context, R.style.UploadDialogStyle);// 创建自定义样式dialog
@@ -67,13 +68,23 @@ public class LoadingViewUtil {
     public void showDialog(Dialog dialog){
         if(dialog!=null){
             try {
+                tipTextView.setText("");
                 dialog.show();
             }catch (Exception  e){
-                Logger.e("显示加载动画发生了异常"+e.getLocalizedMessage());
+                Logger.e("显示加载动画发生了异常:"+e.getLocalizedMessage());
             }
         }
     }
-
+    public void showDialog(Dialog dialog,String msg){
+        if(dialog!=null){
+            try {
+                tipTextView.setText(msg);
+                dialog.show();
+            }catch (Exception  e){
+                Logger.e("显示加载动画发生了异常:"+e.getLocalizedMessage());
+            }
+        }
+    }
 
     /**
      * 关闭指定dialog
@@ -84,7 +95,7 @@ public class LoadingViewUtil {
             if (dialog != null && dialog.isShowing()) dialog.dismiss();
         }catch (Exception e) {
             e.printStackTrace();
-            Logger.e("关闭加载动画发生了异常"+e.getLocalizedMessage());
+            Logger.e("关闭加载动画发生了异常:"+e.getLocalizedMessage());
         }
     }
     public void setLoadMsg(Dialog dialog,String msg){

@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,14 +17,11 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.orhanobut.logger.Logger;
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.wusy.wusylibrary.R;
 import com.wusy.wusylibrary.util.ActivityAnimUtil;
 import com.wusy.wusylibrary.util.ActivityManager;
 import com.wusy.wusylibrary.util.CommonUtil;
-import com.wusy.wusylibrary.util.ImageLoaderUtil;
 import com.wusy.wusylibrary.util.LoadingViewUtil;
-import com.wusy.wusylibrary.util.MTAUtil;
 import com.wusy.wusylibrary.util.StatusBarUtil;
 
 import java.util.ArrayList;
@@ -52,17 +50,18 @@ public abstract class BaseActivity extends AppCompatActivity {
     private BroadcastReceiver broadcastReceiver;
     private LoadingViewUtil loadingViewUtil;
     private Dialog loadDialog;
-    private boolean isChangeStatusBar=true;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        beforeSetContentView();
+        beforeSetContent();
         baseInit();
         findView();
         init();
     }
 
     private void baseInit() {
+
         //         去掉标题栏
         getSupportActionBar().hide();
         setContentView(getContentViewId());
@@ -75,9 +74,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         //将Activity添加进管理器中
         ActivityManager.getInstance().addActivity(this);
         //是否开启状态栏
-        isChangeStatusBar(isChangeStatusBar);
-        //注册ButterKinef
-
+        isChangeStatusBar(true);
+        //禁止横屏
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
     private void isChangeStatusBar(boolean isChange) {
@@ -105,15 +104,16 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
         }
     }
-    public void beforeSetContentView(){
 
-    }
     public abstract int getContentViewId();
 
     public abstract void findView();
 
     public abstract void init();
 
+    public void beforeSetContent(){
+
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -148,7 +148,11 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 打印Toast信息
      */
     public void showToast(String toast) {
-        Toast.makeText(this, toast, Toast.LENGTH_SHORT).show();
+        try{
+            Toast.makeText(this, toast, Toast.LENGTH_SHORT).show();
+        }catch (Exception e){
+            Toast.makeText(this, "失败", Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**
@@ -179,6 +183,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void showLoadImage() {
         loadingViewUtil.showDialog(loadDialog);
     }
+    public void showLoadImage(String str) {
+        loadingViewUtil.showDialog(loadDialog,str);
+    }
 
     public void hideLoadImage() {
         loadingViewUtil.dismissDialog(loadDialog);
@@ -197,12 +204,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (bundle != null) intent.putExtras(bundle);
         startActivity(intent);
     }
-
-    public boolean isChangeStatusBar() {
-        return isChangeStatusBar;
-    }
-
-    public void setChangeStatusBar(boolean changeStatusBar) {
-        isChangeStatusBar = changeStatusBar;
+    public void navigateTo(Class toClass, Bundle bundle,int resultCode) {
+        Intent intent = new Intent(this, toClass);
+        if (bundle != null) intent.putExtras(bundle);
+        startActivityForResult(intent,resultCode);
     }
 }

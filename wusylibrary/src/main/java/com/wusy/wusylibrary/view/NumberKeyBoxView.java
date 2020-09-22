@@ -11,6 +11,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+
 import com.wusy.wusylibrary.R;
 
 import java.util.ArrayList;

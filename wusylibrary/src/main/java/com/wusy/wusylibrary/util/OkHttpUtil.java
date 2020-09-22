@@ -11,6 +11,8 @@ import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.orhanobut.logger.Logger;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -50,6 +52,7 @@ public class OkHttpUtil {
     public static final MediaType JSON=MediaType.parse("application/json; charset=utf-8");
     public  long progress=0;
     public static final int SEND=0;
+    public String Token="";
 
     private OkHttpUtil() {
         init();
@@ -67,7 +70,8 @@ public class OkHttpUtil {
         HttpLoggingInterceptor loggingInterceptor=new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);//设置日志显示级别
         mOkHttpClient = new OkHttpClient().newBuilder()
-                .connectTimeout(20000, TimeUnit.SECONDS)
+                .connectTimeout(60000L*5, TimeUnit.MILLISECONDS)
+                .readTimeout(60000L*5, TimeUnit.MILLISECONDS)
                 .addInterceptor(loggingInterceptor)
                 .build();
 
@@ -86,9 +90,10 @@ public class OkHttpUtil {
                         final ResultCallBack callback) {
         showLog("正在进行Get请求，url：" + url);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        if(Token.equals("")) Token="admin";
         Request.Builder builder = new Request.Builder()
                 .url(url)
-                .addHeader("Authorization","admin");
+                .addHeader("Authorization",Token);
 
         if(headers!=null){
             for (String key : headers.keySet()) {
@@ -99,16 +104,21 @@ public class OkHttpUtil {
         final Request request=builder.build();
         deliveryResult(callback, request, activity);
     }
+
+    /**
+     * 这个有点问题，发出去的是POST
+     */
     public void asynGet(String url, final Activity activity, HashMap<String,String> headers,
                         final ResultCallBack callback,String json) {
         showLog("正在进行Get请求，url：" + url);
         if(!json.equals("")) showLog("作为body上传的json："+json);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         RequestBody requestBody = RequestBody.create(JSON, json);
+        if(Token.equals("")) Token="admin";
         Request.Builder builder = new Request.Builder()
                 .url(url)
                 .post(requestBody)
-                .addHeader("Authorization","admin");
+                .addHeader("Authorization",Token);
 
         if(headers!=null){
             for (String key : headers.keySet()) {
@@ -142,9 +152,10 @@ public class OkHttpUtil {
         for (Map.Entry<String, String> map : maps.entrySet()) {
             formBody.add(map.getKey(), map.getValue());
         }
+        if(Token.equals("")) Token="admin";
         Request request = new Request.Builder()
                 .url(url)
-                .addHeader("Authorization",token)
+                .addHeader("Authorization",Token)
                 .post(formBody.build())
                 .build();
         deliveryResult(callback, request, activity);
@@ -157,9 +168,30 @@ public class OkHttpUtil {
         showLog("正在进行Post请求，url：" + url + "\n上传的值是：" + json);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         RequestBody requestBody = RequestBody.create(JSON, json);
+        if(Token.equals("")) Token="admin";
         Request request = new Request.Builder()
                 .url(url)
-                .addHeader("Authorization",token)
+                .addHeader("Authorization",Token)
+                .post(requestBody)
+                .build();
+        deliveryResult(callback, request, null);
+    }
+    /**
+     * Post直接提交JSON字符串
+     */
+    public void anysPost(String url,String token,HashMap<String,String> maps,String json,final ResultCallBack callback){
+        showLog("正在进行Post请求，url：" + url + "\n上传的值是：" + json);
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        RequestBody requestBody = RequestBody.create(JSON, json);
+        if(Token.equals("")) Token="admin";
+
+        Request.Builder builder=new Request.Builder();
+        for (String key : maps.keySet()) {
+            builder.addHeader(key,maps.get(key));
+        }
+        Request request = builder
+                .url(url)
+                .addHeader("Authorization",Token)
                 .post(requestBody)
                 .build();
         deliveryResult(callback, request, null);
@@ -510,13 +542,13 @@ public class OkHttpUtil {
             } else {
                 Intent intent = new Intent();
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.setAction(android.content.Intent.ACTION_VIEW);
+                intent.setAction(Intent.ACTION_VIEW);
                 intent.addCategory("android.intent.category.DEFAULT");
       /* 调用getMIMEType()来取得MimeType */
                 String type = getMIMEType(f);
       /* 设置intent的file与MimeType */
                 if(Build.VERSION.SDK_INT>=24){
-                    Uri contenturi=FileProvider.getUriForFile(context, "com.wusy.fileprovider",f);
+                    Uri contenturi=FileProvider.getUriForFile(context, "com.hjl.artisan.fileProvider",f);
                     intent.setDataAndType(contenturi,type);
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, contenturi);
                     intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -526,6 +558,7 @@ public class OkHttpUtil {
                 context.startActivity(intent);
             }
         } catch (Exception e) {
+            Logger.e(e,"打开附件---"+f.getName()+"，发生了错误");
             Toast.makeText(context,"打开附件---"+f.getName()+"，发生了错误",Toast.LENGTH_SHORT).show();
         }
     }
@@ -590,9 +623,9 @@ public class OkHttpUtil {
      * get、post请求回调
      */
     public interface ResultCallBack {
-        void successListener(Call call,Response response);
+        void successListener(Call call, Response response);
 
-        void failListener(Call call, IOException e,String message);
+        void failListener(Call call, IOException e, String message);
     }
 
     /**
@@ -615,5 +648,13 @@ public class OkHttpUtil {
          * 下载失败
          */
         void onDownloadFailed(String error);
+    }
+
+    public String getToken() {
+        return Token;
+    }
+
+    public void setToken(String token) {
+        Token = token;
     }
 }

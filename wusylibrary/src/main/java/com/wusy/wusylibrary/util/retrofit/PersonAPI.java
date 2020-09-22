@@ -10,7 +10,7 @@ import retrofit2.http.Query;
 
 public interface PersonAPI {
     @GET("td_web/td/login/")
-    Call<LoginBean> login(@Query("name") String name,@Query("pwd") String pwd);
+    Call<LoginBean> login(@Query("name") String name, @Query("pwd") String pwd);
     @GET("td_web/td/login/")
     Observable<LoginBean> loginRX(@Query("name") String name, @Query("pwd") String pwd);
 }

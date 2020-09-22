@@ -29,7 +29,7 @@ import java.io.OutputStream;
 @SuppressLint("ClickableViewAccessibility")
 public class LinePathView extends View {
 
-    private  static final  String TAG=LinePathView.class.getSimpleName();
+    private  static final  String TAG= LinePathView.class.getSimpleName();
 
     private Context mContext;
 

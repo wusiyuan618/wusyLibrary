@@ -11,7 +11,7 @@ import android.view.ViewGroup;
  */
 
 public abstract class BaseMVPFragment  <V extends IBaseMVPView, T extends BaseMVPPresenter<V>>
-        extends BaseFragment{
+        extends BaseFragment {
     public T mPresenter;
 
     @Nullable

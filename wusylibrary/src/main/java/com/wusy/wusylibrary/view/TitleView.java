@@ -22,7 +22,7 @@ import com.wusy.wusylibrary.util.CommonUtil;
 public class TitleView extends LinearLayout {
     private LinearLayout ll_view,ll_backimg,ll_moreimg,ll_ok;
     private TextView tv_title,tv_ok;
-    private ImageView img_back,img_more;
+    private ImageView img_back,img_more,iv_title;
     private Animation outAnimation,enterAnimation;
     private Context mC;
     public TitleView(Context context) {
@@ -49,6 +49,8 @@ public class TitleView extends LinearLayout {
         ll_backimg= (LinearLayout) findViewById(R.id.titleview_ll_back);
         ll_moreimg= (LinearLayout) findViewById(R.id.titleview_ll_more);
         tv_title= (TextView) findViewById(R.id.titleview_tv_title);
+        iv_title= (ImageView) findViewById(R.id.titleview_iv_title);
+
         img_back= (ImageView) findViewById(R.id.titleview_img_back);
         img_more= (ImageView) findViewById(R.id.titleview_img_more);
         tv_ok=findViewById(R.id.titleview_tv_ok);
@@ -64,13 +66,23 @@ public class TitleView extends LinearLayout {
         tv_title.setText(title);
         return this;
     }
+    public TitleView setTitleOnClick(OnClickListener listen){
+        tv_title.setOnClickListener(listen);
+        return this;
+    }
+    public TitleView setImgTitle(boolean isShow, int imgR){
+        if (isShow) iv_title.setVisibility(View.VISIBLE);
+        else  iv_title.setVisibility(View.GONE);
+        iv_title.setImageResource(imgR);
+        return this;
+    }
     /**
      * 是否显示回退按钮。通过传入的Activity自行调用finish方法
      * @param isShow 是否显示按钮
      * @param activity 按钮关联的Activity
      * @return TitleView
      */
-    public TitleView showBackButton(boolean isShow, final Activity activity,OnClickListener onClickListener){
+    public TitleView showBackButton(boolean isShow, final Activity activity, OnClickListener onClickListener){
         if(isShow) {
             ll_backimg.setVisibility(VISIBLE);
             if(onClickListener==null){
@@ -87,7 +99,7 @@ public class TitleView extends LinearLayout {
         return this;
     }
 
-    public TitleView showBackButton(boolean isShow,final Activity activity){
+    public TitleView showBackButton(boolean isShow, final Activity activity){
         return showBackButton(isShow,activity,null);
     }
     /**
@@ -96,10 +108,10 @@ public class TitleView extends LinearLayout {
      * @param listener 构建该按钮的事件
      * @return TitleView
      */
-    public TitleView showMoreButton(boolean isShow,OnClickListener listener){
+    public TitleView showMoreButton(boolean isShow, OnClickListener listener){
         if(isShow) {
             ll_moreimg.setVisibility(VISIBLE);
-            if (CommonUtil.isNull(listener)) ll_moreimg.setOnClickListener(listener);
+            if (!CommonUtil.isNull(listener)) ll_moreimg.setOnClickListener(listener);
         }else{
             ll_moreimg.setVisibility(INVISIBLE);
         }
@@ -141,7 +153,7 @@ public class TitleView extends LinearLayout {
      * @param listener
      * @return
      */
-    public TitleView showOKButton(String text,boolean isShow,OnClickListener listener){
+    public TitleView showOKButton(String text, boolean isShow, OnClickListener listener){
         if(isShow) {
             tv_ok.setText(text);
             ll_ok.setVisibility(VISIBLE);
@@ -160,7 +172,7 @@ public class TitleView extends LinearLayout {
      *  显示TitleView的方法，带有向上收缩的动画。目标用于上拉下拉时的自主收缩
      */
     public void showTitleView(){
-        if(enterAnimation==null) enterAnimation= AnimationUtils.loadAnimation(mC,R.anim.push_scale_in);
+        if(enterAnimation==null) enterAnimation= AnimationUtils.loadAnimation(mC, R.anim.push_scale_in);
         enterAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -183,7 +195,7 @@ public class TitleView extends LinearLayout {
      *  隐藏TitleView的方法，带有向上展开的动画。目标用于上拉下拉时的自主收缩
      */
     public void hideTitleView(){
-        if(outAnimation==null) outAnimation=AnimationUtils.loadAnimation(mC,R.anim.push_scale_out);
+        if(outAnimation==null) outAnimation=AnimationUtils.loadAnimation(mC, R.anim.push_scale_out);
         outAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
